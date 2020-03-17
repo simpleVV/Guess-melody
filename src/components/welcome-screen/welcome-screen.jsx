@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const WelcomeScreen = (props) => {
-  const {time, errorCount, onWelcomButtonClick} = props;
+  const {
+    time,
+    errorCount,
+    onWelcomButtonClick
+  } = props;
 
   return <section className="welcome">
     <div className="welcome__logo"><img src="img/melody-logo.png"
