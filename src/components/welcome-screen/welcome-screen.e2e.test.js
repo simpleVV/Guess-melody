@@ -7,16 +7,16 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe(`The component interactivity`, () => {
   it(`Will be called callback, if click on the game launch button`, () => {
-    const clickHandler = jest.fn();
+    const welcomButtonclickHandler = jest.fn();
     const welcomeScreen = shallow(<WelcomeScreen
       time = {7}
       errorCount = {4}
-      onWelcomButtonClick = {clickHandler}
+      onWelcomButtonClick = {welcomButtonclickHandler}
     />);
 
     const welcomeButton = welcomeScreen.find(`.welcome__button`);
     welcomeButton.simulate(`click`);
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(welcomButtonclickHandler).toHaveBeenCalledTimes(1);
   });
 });
