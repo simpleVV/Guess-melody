@@ -66,28 +66,12 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  gameTime: WelcomeScreen.propTypes.time,
+  errorCount: WelcomeScreen.propTypes.errorCount,
   questions: PropTypes.arrayOf(PropTypes.shape(
-      {
-        type: PropTypes.oneOf([`genre`, `artist`]),
-        genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]),
-        song: PropTypes.shape(
-            {
-              artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`]),
-              src: PropTypes.string
-            }
-        ),
-        answers: PropTypes.arrayOf(PropTypes.shape(
-            {
-              src: PropTypes.string,
-              picture: PropTypes.string,
-              genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]),
-              artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`])
-            }
-        ))
-      }
-  ))
+      ArtistQuestionScreen.question,
+      GenreQuestionScreen.question)
+  )
 };
 
 export default App;
