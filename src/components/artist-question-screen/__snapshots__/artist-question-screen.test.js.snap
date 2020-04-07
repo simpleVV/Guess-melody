@@ -86,18 +86,16 @@ exports[`The component is rendered correctly ArtistQuestionScreen correctly rend
     <div
       className="game__track"
     >
+      <button
+        className="track__button track__button--play"
+        disabled={true}
+        onClick={[Function]}
+        type="button"
+      />
       <div
-        className="track"
+        className="track__status"
       >
-        <button
-          className="track__button track__button--play"
-          type="button"
-        />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
+        <audio />
       </div>
     </div>
     <form

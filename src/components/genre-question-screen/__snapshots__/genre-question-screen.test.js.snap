@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly GenreQuestionScreen correctly render with transferrd mock-question 1`] = `
+exports[`The component is rendered correctly GenreQuestionScreen correctly render with transferred mock-question 1`] = `
 <section
   className="game game--genre"
 >
@@ -94,6 +94,8 @@ exports[`The component is rendered correctly GenreQuestionScreen correctly rende
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -125,6 +127,8 @@ exports[`The component is rendered correctly GenreQuestionScreen correctly rende
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -156,6 +160,8 @@ exports[`The component is rendered correctly GenreQuestionScreen correctly rende
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -187,6 +193,8 @@ exports[`The component is rendered correctly GenreQuestionScreen correctly rende
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div

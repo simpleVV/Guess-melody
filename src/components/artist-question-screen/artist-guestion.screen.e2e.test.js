@@ -6,7 +6,7 @@ import ArtistQuestionScreen from './artist-question-screen.jsx';
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`The component interactivity`, () => {
-  it(`Return correct data then user answer on question`, () => {
+  it(`Return correct data when user answer on question`, () => {
     const mockQuestion = {
       type: `artist`,
       song: {
