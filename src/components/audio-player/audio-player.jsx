@@ -6,7 +6,6 @@ class AudioPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
-
     this._audioRef = React.createRef();
     this.state = {
       progress: null,
@@ -28,11 +27,9 @@ class AudioPlayer extends PureComponent {
         isLoading: false
       });
 
-      audio.onplay = () => {
-        this.setState({
-          isPlaying: true
-        });
-      };
+      audio.onplay = () => this.setState({
+        isPlaying: true
+      });
 
       audio.onpause = () => this.setState({
         isPlaying: false

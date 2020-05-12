@@ -64,7 +64,8 @@ class ArtistQuestionScreen extends PureComponent {
         <form className="game__artist">
           {answers.map((answer, i) => {
             return <div key = {`${screenIndex}-answer + ${i}`} className="artist">
-              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`} onChange = {(evt) => onAnswer(evt.target.value)}/>
+              <input className="artist__input visually-hidden" type="radio" name="answer" value={`answer-${i}`} id={`answer-${i}`}
+                onClick = {() => onAnswer(answer)}/>
               <label className="artist__name" htmlFor={`answer-${i}`}>
                 <img className="artist__picture" src={answer.picture} alt={answer.artist}/>
                 {answer.artist}
@@ -89,12 +90,13 @@ ArtistQuestionScreen.propTypes = {
               src: PropTypes.string,
             }
         ),
-        answers: PropTypes.arrayOf(PropTypes.shape(
-            {
-              picture: PropTypes.string,
-              artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`])
-            }
-        ))
+        answers: PropTypes.arrayOf(
+            PropTypes.shape(
+                {
+                  picture: PropTypes.string,
+                  artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`])
+                }
+            ))
       }
   )
 };

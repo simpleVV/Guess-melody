@@ -108,7 +108,7 @@ exports[`The component is rendered correctly ArtistQuestionScreen correctly rend
           className="artist__input visually-hidden"
           id="answer-0"
           name="answer"
-          onChange={[Function]}
+          onClick={[Function]}
           type="radio"
           value="answer-0"
         />
@@ -131,7 +131,7 @@ exports[`The component is rendered correctly ArtistQuestionScreen correctly rend
           className="artist__input visually-hidden"
           id="answer-1"
           name="answer"
-          onChange={[Function]}
+          onClick={[Function]}
           type="radio"
           value="answer-1"
         />
@@ -154,7 +154,7 @@ exports[`The component is rendered correctly ArtistQuestionScreen correctly rend
           className="artist__input visually-hidden"
           id="answer-2"
           name="answer"
-          onChange={[Function]}
+          onClick={[Function]}
           type="radio"
           value="answer-2"
         />

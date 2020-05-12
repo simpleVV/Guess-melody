@@ -7,17 +7,13 @@ class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      'answer-0': false,
-      'answer-1': false,
-      'answer-2': false,
-      'answer-3': false,
-      'userAnswers': [],
-      'activePlayer': -1
-    };
+    const {question} = this.props;
+    const {answers} = question;
 
-    this._getUserAnswer = this._getUserAnswer.bind(this);
-    this._confirmUserAnswer = this._confirmUserAnswer.bind(this);
+    this.state = {
+      activePlayer: -1,
+      userAnswers: new Array(answers.length).fill(false)
+    };
   }
 
   render() {
@@ -60,10 +56,11 @@ class GenreQuestionScreen extends PureComponent {
 
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
-        <form className="game__tracks" onSubmit = {() => {
-          this._confirmUserAnswer();
-          onAnswer(this.state.userAnswers);
-        }}>
+        <form className="game__tracks"
+          onSubmit = {(evt) => {
+            evt.preventDefault();
+            onAnswer(this.state.userAnswers);
+          }}>
           {answers.map((answer, i) => {
             return <div key = {`${screenIndex}-answer + ${i}`} className="track">
               <AudioPlayer
@@ -74,7 +71,15 @@ class GenreQuestionScreen extends PureComponent {
                 })}
               />
               <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} onChange={(evt) => this._getUserAnswer(evt.target)}/>
+                <input className="game__input visually-hidden" type="checkbox" name="answer"
+                  checked = {this.state.userAnswers[i]}
+                  value={`answer-${i}`}
+                  id={`answer-${i}`}
+                  onChange={() => {
+                    const userAnswers = [...this.state.userAnswers];
+                    userAnswers[i] = !userAnswers[i];
+                    this.setState({userAnswers});
+                  }}/>
                 <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
               </div>
             </div>;
@@ -83,23 +88,6 @@ class GenreQuestionScreen extends PureComponent {
         </form>
       </section>
     </section>;
-  }
-
-  _confirmUserAnswer() {
-    this.setState((prevState) => {
-      const answers = [prevState[`answer-0`], prevState[`answer-1`], prevState[`answer-2`], prevState[`answer-3`]];
-
-      return {
-        userAnswers: answers
-      };
-    });
-  }
-
-  _getUserAnswer(answer) {
-    this.setState((prevState) => {
-      const answerKey = answer.value;
-      prevState[answerKey] = (answer.checked) ? true : false;
-    });
   }
 }
 
@@ -110,12 +98,13 @@ GenreQuestionScreen.propTypes = {
       {
         type: PropTypes.oneOf([`genre`]),
         genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]),
-        answers: PropTypes.arrayOf(PropTypes.shape(
-            {
-              src: PropTypes.string,
-              genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
-            }
-        ))
+        answers: PropTypes.arrayOf(
+            PropTypes.shape(
+                {
+                  src: PropTypes.string,
+                  genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
+                }
+            ))
       }
   )
 };
