@@ -39,13 +39,9 @@ describe(`The component interactivity`, () => {
 
     const radioInput = artistQuestionScreen.find(`.artist__input`).first();
 
-    radioInput.simulate(`change`, {
-      target: {
-        value: `John Snow`
-      }
-    });
+    radioInput.simulate(`click`);
 
     expect(radioInputCheckHandler).toHaveBeenCalledTimes(1);
-    expect(radioInputCheckHandler.mock.calls[0][0]).toEqual(mockQuestion.answers[0].artist);
+    expect(radioInputCheckHandler.mock.calls[0][0]).toEqual(mockQuestion.answers[0]);
   });
 });
