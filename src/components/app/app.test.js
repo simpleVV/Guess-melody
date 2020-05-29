@@ -77,6 +77,8 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -98,6 +100,8 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -119,6 +123,29 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
+      />).toJSON();
+
+    expect(appComponent).toMatchSnapshot();
+  });
+  it(`App correctly renders end-time screen`, () => {
+    const {questions} = mockQuestions;
+    const {
+      errorCount,
+    } = settings;
+
+    const appComponent = renderer
+      .create(<App
+        step = {1}
+        mistakes = {0}
+        gameTime = {0}
+        errorCount = {errorCount}
+        questions = {questions}
+        onUserAnswer = {jest.fn()}
+        onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();

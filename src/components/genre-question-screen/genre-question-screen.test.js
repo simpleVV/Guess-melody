@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import GenreQuestionScreen from './genre-question-screen.jsx';
 
 describe(`The component is rendered correctly`, () => {
-  it(`GenreQuestionScreen correctly render with transferred mock-question`, () => {
+  it(`GenreQuestionScreen correctly renders with transferred mock-question`, () => {
     const question = {
       type: `genre`,
       genre: `rock`,

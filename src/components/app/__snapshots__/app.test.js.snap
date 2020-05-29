@@ -1,60 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly App correctly render with transferrd mock data 1`] = `
-<section
-  className="welcome"
->
-  <div
-    className="welcome__logo"
-  >
-    <img
-      alt="Угадай мелодию"
-      height="83"
-      src="img/melody-logo.png"
-      width="186"
-    />
-  </div>
-  <button
-    className="welcome__button"
-  >
-    <span
-      className="visually-hidden"
-    >
-      Начать игру
-    </span>
-  </button>
-  <h2
-    className="welcome__rules-title"
-  >
-    Правила игры
-  </h2>
-  <p
-    className="welcome__text"
-  >
-    Правила просты:
-  </p>
-  <ul
-    className="welcome__rules-list"
-  >
-    <li>
-      За 
-      7
-       минут нужно ответить на все вопросы.
-    </li>
-    <li>
-      Можно допустить 
-      4
-       ошибки.
-    </li>
-  </ul>
-  <p
-    className="welcome__text"
-  >
-    Удачи!
-  </p>
-</section>
-`;
-
 exports[`The component is rendered correctly App correctly renders artist question screen 1`] = `
 <section
   className="game game--artist"
@@ -103,7 +48,7 @@ exports[`The component is rendered correctly App correctly renders artist questi
       <span
         className="timer__mins"
       >
-        05
+        0
       </span>
       <span
         className="timer__dots"
@@ -120,13 +65,16 @@ exports[`The component is rendered correctly App correctly renders artist questi
       className="game__mistakes"
     >
       <div
-        className="wrong"
+        className="correct"
       />
       <div
-        className="wrong"
+        className="correct"
       />
       <div
-        className="wrong"
+        className="correct"
+      />
+      <div
+        className="correct"
       />
     </div>
   </header>
@@ -230,6 +178,40 @@ exports[`The component is rendered correctly App correctly renders artist questi
 </section>
 `;
 
+exports[`The component is rendered correctly App correctly renders end-time screen 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Увы и ах!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Время вышло! Вы не успели отгадать все мелодии
+  </p>
+  <button
+    className="replay"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    Попробовать ещё раз
+  </button>
+</section>
+`;
+
 exports[`The component is rendered correctly App correctly renders genre question screen 1`] = `
 <section
   className="game game--genre"
@@ -278,7 +260,7 @@ exports[`The component is rendered correctly App correctly renders genre questio
       <span
         className="timer__mins"
       >
-        05
+        0
       </span>
       <span
         className="timer__dots"
@@ -295,13 +277,16 @@ exports[`The component is rendered correctly App correctly renders genre questio
       className="game__mistakes"
     >
       <div
-        className="wrong"
+        className="correct"
       />
       <div
-        className="wrong"
+        className="correct"
       />
       <div
-        className="wrong"
+        className="correct"
+      />
+      <div
+        className="correct"
       />
     </div>
   </header>
