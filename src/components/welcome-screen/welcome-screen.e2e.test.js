@@ -5,9 +5,10 @@ import WelcomeScreen from './welcome-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const welcomButtonclickHandler = jest.fn();
+
 describe(`The component interactivity`, () => {
   it(`Will be called callback, if click on the game launch button`, () => {
-    const welcomButtonclickHandler = jest.fn();
     const welcomeScreen = shallow(<WelcomeScreen
       time = {7}
       errorCount = {4}

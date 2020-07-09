@@ -73,10 +73,13 @@ describe(`The component is rendered correctly`, () => {
         step = {-1}
         mistakes = {0}
         gameTime = {time}
+        minutes = {5}
         errorCount = {errorCount}
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -94,10 +97,13 @@ describe(`The component is rendered correctly`, () => {
         step = {0}
         mistakes = {0}
         gameTime = {time}
+        minutes = {5}
         errorCount = {errorCount}
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -115,10 +121,35 @@ describe(`The component is rendered correctly`, () => {
         step = {1}
         mistakes = {0}
         gameTime = {time}
+        minutes = {5}
         errorCount = {errorCount}
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
+      />).toJSON();
+
+    expect(appComponent).toMatchSnapshot();
+  });
+  it(`App correctly renders end-time screen`, () => {
+    const {questions} = mockQuestions;
+    const {
+      errorCount,
+    } = settings;
+
+    const appComponent = renderer
+      .create(<App
+        step = {1}
+        mistakes = {0}
+        gameTime = {0}
+        minutes = {5}
+        errorCount = {errorCount}
+        questions = {questions}
+        onUserAnswer = {jest.fn()}
+        onWelcomButtonClick = {jest.fn()}
+        onTimeUpdate = {jest.fn()}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();

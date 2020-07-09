@@ -2,39 +2,58 @@ import React from 'react';
 import {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer/action-creator.js';
 
-import {ActionCreator} from '../../reducer.js';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
+import FailTime from '../fail-time/fail-time.jsx';
+import GameScreen from '../game-screen/game-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.js';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.js';
+
+const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 class App extends PureComponent {
   render() {
     const {
       questions,
-      step
+      step,
+      gameTime,
     } = this.props;
 
-    return this._getScreen(questions[step]);
+    return (
+      this._getScreen(questions[step], gameTime)
+    );
   }
 
-  _getScreen(question) {
+  _getScreen(question, gameTime) {
     if (!question) {
       const {
-        gameTime,
         errorCount,
-        onWelcomButtonClick
+        onWelcomButtonClick,
+        minutes
       } = this.props;
 
       return <WelcomeScreen
-        time = {gameTime}
+        time = {minutes}
         errorCount = {errorCount}
         onWelcomButtonClick = {onWelcomButtonClick}
       />;
     }
 
+    if (gameTime <= 0) {
+      const {onReset} = this.props;
+
+      return <FailTime
+        onReplayButtonClick = {onReset}
+      />;
+    }
+
     const {
       onUserAnswer,
+      onTimeUpdate,
       mistakes,
       errorCount,
       step
@@ -42,27 +61,35 @@ class App extends PureComponent {
 
     switch (question.type) {
       case `genre`:
-        return <GenreQuestionScreen
-          screenIndex = {step}
-          question = {question}
-          onAnswer = {(userAnswer) => onUserAnswer(
-              userAnswer,
-              question,
-              mistakes,
-              errorCount
-          )}
-        />;
+        return (
+          <GameScreen
+            type = {question.type}
+            mistakes = {mistakes}
+            errorCount = {errorCount}
+            gameTime = {gameTime}
+            onTimeUpdate = {onTimeUpdate}
+          >
+            <GenreQuestionScreenWrapped
+              screenIndex = {step}
+              question = {question}
+              onAnswer = {onUserAnswer}/>
+          </GameScreen>
+        );
       case `artist`:
-        return <ArtistQuestionScreen
-          screenIndex = {step}
-          question = {question}
-          onAnswer = {(userAnswer) => onUserAnswer(
-              userAnswer,
-              question,
-              mistakes,
-              errorCount
-          )}
-        />;
+        return (
+          <GameScreen
+            type = {question.type}
+            mistakes = {mistakes}
+            errorCount = {errorCount}
+            gameTime = {gameTime}
+            onTimeUpdate = {onTimeUpdate}
+          >
+            <ArtistQuestionScreenWrapped
+              screenIndex = {step}
+              question = {question}
+              onAnswer = {onUserAnswer}/>
+          </GameScreen>
+        );
     }
     return null;
   }
@@ -73,8 +100,11 @@ App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
+  minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
+  onTimeUpdate: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(
       PropTypes.shape(
           ArtistQuestionScreen.question,
@@ -84,7 +114,10 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
-  mistakes: state.mistakes
+  mistakes: state.mistakes,
+  gameTime: state.gameTime,
+  minutes: state.minutes,
+  errorCount: state.errorCount
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -92,9 +125,10 @@ const mapDispatchToProps = (dispatch) => ({
   onUserAnswer: (userAnswer, question, mistakes, maxMistakes) => {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
-  }
+  },
+  onTimeUpdate: (gameTime) => dispatch(ActionCreator.decrementTime(gameTime)),
+  onReset: () => dispatch(ActionCreator.reset())
 });
 
 export {App};
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);

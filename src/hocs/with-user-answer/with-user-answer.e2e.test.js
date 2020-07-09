@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GenreQuestionScreen from './genre-question-screen.jsx';
+import withUserAnswer from './with-user-answer.js';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -31,29 +31,26 @@ const mockQuestion = {
     }
   ]
 };
-const mockAnswers = [false, false, false, false];
-const answerSubmitHandler = jest.fn();
-const renderPlayer = jest.fn();
-const onChangeHandler = jest.fn();
+const MockComponent = () => <div />;
+const MockComponentWrapped = withUserAnswer(MockComponent);
+const onAnswerHandler = jest.fn();
 
 describe(`The component interactivity`, () => {
-  it(`Calls callback when user Click on submit button`, () => {
-    const genreQuestionScreen = shallow(<GenreQuestionScreen
-      screenIndex = {0}
+  it(`Should change answers`, () => {
+    const mockComponentWrapped = shallow(<MockComponentWrapped
       question = {mockQuestion}
-      onAnswer = {answerSubmitHandler}
-      renderPlayer = {renderPlayer}
-      userAnswers = {mockAnswers}
-      onChange = {onChangeHandler}
+      onAnswer = {onAnswerHandler}
     />);
 
-    const form = genreQuestionScreen.find(`.game__tracks`);
+    expect(mockComponentWrapped.props().userAnswers).toEqual([false, false, false, false]);
 
-    form.simulate(`submit`, {
-      preventDefault: () => {}
-    });
+    mockComponentWrapped.props().onChange(0, true);
+    expect(mockComponentWrapped.props().userAnswers).toEqual([true, false, false, false]);
 
-    expect(answerSubmitHandler).toHaveBeenCalledTimes(1);
-    expect(answerSubmitHandler.mock.calls[0][0]).toEqual(void 0);
+    mockComponentWrapped.props().onChange(0, false);
+    expect(mockComponentWrapped.props().userAnswers).toEqual([false, false, false, false]);
+
+    mockComponentWrapped.props().onChange(2, true);
+    expect(mockComponentWrapped.props().userAnswers).toEqual([false, false, true, false]);
   });
 });

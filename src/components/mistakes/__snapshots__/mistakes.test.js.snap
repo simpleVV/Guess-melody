@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The element is rendered correctly Mistakes element correctly renders if a few answers is incorrect 1`] = `
+<div
+  className="game__mistakes"
+>
+  <div
+    className="correct"
+  />
+  <div
+    className="wrong"
+  />
+  <div
+    className="wrong"
+  />
+</div>
+`;
+
+exports[`The element is rendered correctly Mistakes element correctly renders if all answers correct 1`] = `
+<div
+  className="game__mistakes"
+>
+  <div
+    className="correct"
+  />
+  <div
+    className="correct"
+  />
+  <div
+    className="correct"
+  />
+</div>
+`;
