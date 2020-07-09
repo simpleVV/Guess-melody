@@ -5,10 +5,11 @@ import Timer from './timer.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const mockTimeInMilSec = 300000;
+const timeUpdateHandler = jest.fn();
+
 describe(`The component interactivity`, () => {
   it(`The timer update time every second`, () => {
-    const mockTimeInMilSec = 300000;
-    const timeUpdateHandler = jest.fn();
 
     jest.useFakeTimers();
 

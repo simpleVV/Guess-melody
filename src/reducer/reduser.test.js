@@ -5,6 +5,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual({
       step: -1,
       mistakes: 0,
+      minutes: 5,
       gameTime: 300000,
       errorCount: 3
     });
@@ -76,6 +77,7 @@ describe(`Reducer works correctly`, () => {
     )).toEqual({
       step: -1,
       mistakes: 0,
+      minutes: 5,
       gameTime: 300000,
       errorCount: 3
     });
@@ -85,6 +87,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       step: 2,
       mistakes: 3,
+      minutes: 5,
       gameTimeMin: 3,
       gameTime: 180000
     },
@@ -95,6 +98,7 @@ describe(`Reducer works correctly`, () => {
     )).toEqual({
       step: 2,
       mistakes: 3,
+      minutes: 5,
       gameTimeMin: 3,
       gameTime: 179000
     });

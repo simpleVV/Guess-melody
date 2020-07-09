@@ -2,13 +2,18 @@ import React from 'react';
 import {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-
 import {ActionCreator} from '../../reducer/action-creator.js';
+
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import FailTime from '../fail-time/fail-time.jsx';
-import Header from '../header/header.jsx';
+import GameScreen from '../game-screen/game-screen.jsx';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player.js';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.js';
+
+const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 class App extends PureComponent {
   render() {
@@ -27,11 +32,12 @@ class App extends PureComponent {
     if (!question) {
       const {
         errorCount,
-        onWelcomButtonClick
+        onWelcomButtonClick,
+        minutes
       } = this.props;
 
       return <WelcomeScreen
-        time = {gameTime}
+        time = {minutes}
         errorCount = {errorCount}
         onWelcomButtonClick = {onWelcomButtonClick}
       />;
@@ -56,43 +62,33 @@ class App extends PureComponent {
     switch (question.type) {
       case `genre`:
         return (
-          <section className={`game game--${question.type}`}>
-            <Header
-              mistakes = {mistakes}
-              errorCount = {errorCount}
-              gameTime = {gameTime}
-              onTimeUpdate = {onTimeUpdate}
-            />
-            <GenreQuestionScreen
+          <GameScreen
+            type = {question.type}
+            mistakes = {mistakes}
+            errorCount = {errorCount}
+            gameTime = {gameTime}
+            onTimeUpdate = {onTimeUpdate}
+          >
+            <GenreQuestionScreenWrapped
               screenIndex = {step}
               question = {question}
-              onAnswer = {(userAnswer) => onUserAnswer(
-                  userAnswer,
-                  question,
-                  mistakes,
-                  errorCount
-              )}/>
-          </section>
+              onAnswer = {onUserAnswer}/>
+          </GameScreen>
         );
       case `artist`:
         return (
-          <section className={`game game--${question.type}`}>
-            <Header
-              mistakes = {mistakes}
-              errorCount = {errorCount}
-              gameTime = {gameTime}
-              onTimeUpdate = {onTimeUpdate}
-            />
-            <ArtistQuestionScreen
+          <GameScreen
+            type = {question.type}
+            mistakes = {mistakes}
+            errorCount = {errorCount}
+            gameTime = {gameTime}
+            onTimeUpdate = {onTimeUpdate}
+          >
+            <ArtistQuestionScreenWrapped
               screenIndex = {step}
               question = {question}
-              onAnswer = {(userAnswer) => onUserAnswer(
-                  userAnswer,
-                  question,
-                  mistakes,
-                  errorCount
-              )}/>
-          </section>
+              onAnswer = {onUserAnswer}/>
+          </GameScreen>
         );
     }
     return null;
@@ -104,6 +100,7 @@ App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
+  minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
@@ -119,6 +116,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
   mistakes: state.mistakes,
   gameTime: state.gameTime,
+  minutes: state.minutes,
   errorCount: state.errorCount
 });
 

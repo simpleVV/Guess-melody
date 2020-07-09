@@ -3,6 +3,7 @@ const initialState = {
   mistakes: 0,
   errorCount: 3,
   gameTime: 300000,
+  minutes: 5
 };
 
 const reducer = (state = initialState, action) => {

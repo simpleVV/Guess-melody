@@ -19,12 +19,13 @@ class Timer extends PureComponent {
 
   render() {
     const [minutes, seconds] = this._convertTime();
+    const TIME_WITHOUT_LEADING_ZERO = 10;
 
     return (
       <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-        <span className="timer__mins">{minutes}</span>
+        <span className="timer__mins">{(minutes < TIME_WITHOUT_LEADING_ZERO) ? `0${minutes}` : minutes}</span>
         <span className="timer__dots">:</span>
-        <span className="timer__secs">{(seconds < 10) ? `0${seconds}` : seconds}</span>
+        <span className="timer__secs">{(seconds < TIME_WITHOUT_LEADING_ZERO) ? `0${seconds}` : seconds}</span>
       </div>
     );
   }

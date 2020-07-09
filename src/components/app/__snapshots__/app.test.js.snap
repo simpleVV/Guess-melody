@@ -48,7 +48,7 @@ exports[`The component is rendered correctly App correctly renders artist questi
       <span
         className="timer__mins"
       >
-        0
+        00
       </span>
       <span
         className="timer__dots"
@@ -260,7 +260,7 @@ exports[`The component is rendered correctly App correctly renders genre questio
       <span
         className="timer__mins"
       >
-        0
+        00
       </span>
       <span
         className="timer__dots"
@@ -490,7 +490,7 @@ exports[`The component is rendered correctly App correctly renders welcome scree
   >
     <li>
       За 
-      7
+      5
        минут нужно ответить на все вопросы.
     </li>
     <li>

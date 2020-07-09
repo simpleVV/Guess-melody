@@ -8,7 +8,7 @@ exports[`The component is rendered correctly Timer component is rendered correct
   <span
     className="timer__mins"
   >
-    5
+    05
   </span>
   <span
     className="timer__dots"
