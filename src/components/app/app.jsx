@@ -53,9 +53,6 @@ class App extends PureComponent {
 
     const {
       onUserAnswer,
-      onTimeUpdate,
-      mistakes,
-      errorCount,
       step
     } = this.props;
 
@@ -64,10 +61,6 @@ class App extends PureComponent {
         return (
           <GameScreen
             type = {question.type}
-            mistakes = {mistakes}
-            errorCount = {errorCount}
-            gameTime = {gameTime}
-            onTimeUpdate = {onTimeUpdate}
           >
             <GenreQuestionScreenWrapped
               screenIndex = {step}
@@ -79,10 +72,6 @@ class App extends PureComponent {
         return (
           <GameScreen
             type = {question.type}
-            mistakes = {mistakes}
-            errorCount = {errorCount}
-            gameTime = {gameTime}
-            onTimeUpdate = {onTimeUpdate}
           >
             <ArtistQuestionScreenWrapped
               screenIndex = {step}
@@ -103,7 +92,6 @@ App.propTypes = {
   minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
-  onTimeUpdate: PropTypes.func.isRequired,
   onReset: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(
       PropTypes.shape(
@@ -126,7 +114,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
   },
-  onTimeUpdate: (gameTime) => dispatch(ActionCreator.decrementTime(gameTime)),
   onReset: () => dispatch(ActionCreator.reset())
 });
 

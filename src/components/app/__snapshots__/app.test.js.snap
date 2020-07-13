@@ -48,7 +48,7 @@ exports[`The component is rendered correctly App correctly renders artist questi
       <span
         className="timer__mins"
       >
-        00
+        05
       </span>
       <span
         className="timer__dots"
@@ -64,9 +64,6 @@ exports[`The component is rendered correctly App correctly renders artist questi
     <div
       className="game__mistakes"
     >
-      <div
-        className="correct"
-      />
       <div
         className="correct"
       />
@@ -260,7 +257,7 @@ exports[`The component is rendered correctly App correctly renders genre questio
       <span
         className="timer__mins"
       >
-        00
+        05
       </span>
       <span
         className="timer__dots"
@@ -276,9 +273,6 @@ exports[`The component is rendered correctly App correctly renders genre questio
     <div
       className="game__mistakes"
     >
-      <div
-        className="correct"
-      />
       <div
         className="correct"
       />

@@ -7,10 +7,6 @@ import Timer from '../timer/timer.jsx';
 const GameScreen = (props) => {
   const {
     children,
-    gameTime,
-    onTimeUpdate,
-    mistakes,
-    errorCount,
     type
   } = props;
 
@@ -27,15 +23,9 @@ const GameScreen = (props) => {
             style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <Timer
-          gameTime = {gameTime}
-          onTimeUpdate = {onTimeUpdate}
-        />
+        <Timer/>
+        <Mistakes/>
 
-        <Mistakes
-          mistakes = {mistakes}
-          errorCount = {errorCount}
-        />
       </header>
 
       {children}
@@ -49,10 +39,6 @@ GameScreen.propTypes = {
     PropTypes.node
   ]).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]),
-  mistakes: Mistakes.propTypes.mistakes,
-  errorCount: Mistakes.propTypes.errorCount,
-  onTimeUpdate: Timer.propTypes.onTimeUpdate,
-  gameTime: Timer.propTypes.gameTime
 };
 
 export default GameScreen;

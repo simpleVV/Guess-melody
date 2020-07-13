@@ -1,6 +1,15 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+
 import {App} from './app.jsx';
+
+const mockStore = createStore(() => ({
+  mistakes: 0,
+  errorCount: 3,
+  gameTime: 300000,
+}));
 
 const mockQuestions = {
   questions: [
@@ -78,7 +87,6 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
-        onTimeUpdate = {jest.fn()}
         onReset = {jest.fn()}
       />).toJSON();
 
@@ -93,18 +101,21 @@ describe(`The component is rendered correctly`, () => {
     } = settings;
 
     const appComponent = renderer
-      .create(<App
-        step = {0}
-        mistakes = {0}
-        gameTime = {time}
-        minutes = {5}
-        errorCount = {errorCount}
-        questions = {questions}
-        onUserAnswer = {jest.fn()}
-        onWelcomButtonClick = {jest.fn()}
-        onTimeUpdate = {jest.fn()}
-        onReset = {jest.fn()}
-      />).toJSON();
+      .create(
+          <Provider store = {mockStore}>
+            <App
+              step = {0}
+              mistakes = {0}
+              gameTime = {time}
+              minutes = {5}
+              errorCount = {errorCount}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              onReset = {jest.fn()}
+            />
+          </Provider
+          >).toJSON();
 
     expect(appComponent).toMatchSnapshot();
   });
@@ -117,18 +128,21 @@ describe(`The component is rendered correctly`, () => {
     } = settings;
 
     const appComponent = renderer
-      .create(<App
-        step = {1}
-        mistakes = {0}
-        gameTime = {time}
-        minutes = {5}
-        errorCount = {errorCount}
-        questions = {questions}
-        onUserAnswer = {jest.fn()}
-        onWelcomButtonClick = {jest.fn()}
-        onTimeUpdate = {jest.fn()}
-        onReset = {jest.fn()}
-      />).toJSON();
+      .create(
+          <Provider store = {mockStore}>
+            <App
+              step = {1}
+              mistakes = {0}
+              gameTime = {time}
+              minutes = {5}
+              errorCount = {errorCount}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              onReset = {jest.fn()}
+            />
+          </Provider
+          >).toJSON();
 
     expect(appComponent).toMatchSnapshot();
   });
@@ -148,7 +162,6 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
-        onTimeUpdate = {jest.fn()}
         onReset = {jest.fn()}
       />).toJSON();
 

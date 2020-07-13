@@ -9,7 +9,6 @@ const withAudio = (Component) => {
 
       this._audioRef = React.createRef();
       this.state = {
-        progress: null,
         isLoading: true,
         isPlaying: props.isPlaying
       };
@@ -35,10 +34,6 @@ const withAudio = (Component) => {
         audio.onpause = () => this.setState({
           isPlaying: false
         });
-
-        audio.ontimeupdate = () => this.setState({
-          progress: audio.currentTime
-        });
       }
     }
 
@@ -60,7 +55,6 @@ const withAudio = (Component) => {
       audio.oncanplaythrough = null;
       audio.onplay = null;
       audio.onpause = null;
-      audio.ontimeupdate = null;
       audio.src = ``;
     }
 
