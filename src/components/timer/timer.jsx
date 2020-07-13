@@ -1,11 +1,14 @@
 import React from 'react';
 import {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer/action-creator.js';
 
 class Timer extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.milSecInSec = 1000;
     this._tick = this._tick.bind(this);
   }
 
@@ -31,8 +34,7 @@ class Timer extends PureComponent {
   }
 
   _startTimer() {
-    const milSecInSec = 1000;
-    this.timer = setInterval(this._tick, milSecInSec);
+    this.timer = setInterval(this._tick, this.milSecInSec);
   }
 
   _stopTimer() {
@@ -47,9 +49,8 @@ class Timer extends PureComponent {
   _convertTime() {
     const {gameTime} = this.props;
     const secInMin = 60;
-    const milSecInSec = 1000;
-    const mins = Math.floor(gameTime / milSecInSec / secInMin);
-    const secRemainOfMin = Math.floor((gameTime / milSecInSec) % secInMin);
+    const mins = Math.floor(gameTime / this.milSecInSec / secInMin);
+    const secRemainOfMin = Math.floor((gameTime / this.milSecInSec) % secInMin);
 
     return [mins, secRemainOfMin];
   }
@@ -60,4 +61,13 @@ Timer.propTypes = {
   onTimeUpdate: PropTypes.func.isRequired
 };
 
-export default Timer;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  gameTime: state.gameTime,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTimeUpdate: (gameTime) => dispatch(ActionCreator.decrementTime(gameTime)),
+});
+
+export {Timer};
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);
