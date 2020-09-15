@@ -10,7 +10,7 @@ const mockTimeInMilSec = 300000;
 const timeUpdateHandler = jest.fn();
 
 describe(`The component interactivity`, () => {
-  it(`The timer update time every second`, () => {
+  it(`Update time every second`, () => {
 
     jest.useFakeTimers();
 

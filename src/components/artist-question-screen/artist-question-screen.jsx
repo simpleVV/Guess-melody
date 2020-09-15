@@ -50,8 +50,8 @@ const ArtistQuestionScreen = (props) => {
 };
 
 ArtistQuestionScreen.propTypes = {
-  screenIndex: PropTypes.number,
-  onAnswer: PropTypes.func,
+  screenIndex: PropTypes.number.isRequired,
+  onAnswer: PropTypes.func.isRequired,
   renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape(
       {
@@ -61,14 +61,14 @@ ArtistQuestionScreen.propTypes = {
               artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`]),
               src: PropTypes.string,
             }
-        ),
+        ).isRequired,
         answers: PropTypes.arrayOf(
             PropTypes.shape(
                 {
                   picture: PropTypes.string,
                   artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`])
                 }
-            ))
+            )).isRequired
       }
   )
 };

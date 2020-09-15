@@ -97,7 +97,7 @@ App.propTypes = {
       PropTypes.shape(
           ArtistQuestionScreen.question,
           GenreQuestionScreen.question)
-  )
+  ).isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {

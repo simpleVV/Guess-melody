@@ -8,7 +8,10 @@ import withAudio from './with-audio.js';
 Enzyme.configure({adapter: new Adapter()});
 
 const MockPlayer = (props) => {
-  const {children, onPlayButtonClick} = props;
+  const {
+    children,
+    onPlayButtonClick
+  } = props;
 
   return (
     <div>

@@ -19,7 +19,7 @@ const FailTime = (props) => {
 };
 
 FailTime.propTypes = {
-  onReplayButtonClick: PropTypes.func
+  onReplayButtonClick: PropTypes.func.isRequired
 };
 
 export default FailTime;

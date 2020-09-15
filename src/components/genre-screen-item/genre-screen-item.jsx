@@ -34,15 +34,15 @@ const GenreItem = (props) => {
 
 GenreItem.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
-  id: PropTypes.number,
-  userAnswer: PropTypes.bool,
+  id: PropTypes.number.isRequired,
+  userAnswer: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   answer: PropTypes.shape(
       {
         src: PropTypes.string,
         genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
       }
-  )
+  ).isRequired
 };
 
 export default GenreItem;

@@ -7,6 +7,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 const mockTrackSrc = `https://upload.wikimedia.org/wikipedia/commons/6/64/Ugandan_national_anthem%2C_performed_by_the_U.S._Navy_Band.ogg`;
 const playButtonClickHandler = jest.fn();
+const mockElement = <audio/>;
 
 describe(`The component interactivity`, () => {
   it(`Calls callback when user Click by play button`, () => {
@@ -15,7 +16,10 @@ describe(`The component interactivity`, () => {
       isLoading = {true}
       src = {mockTrackSrc}
       onPlayButtonClick = {playButtonClickHandler}
-    />);
+    >
+      {mockElement}
+    </AudioPlayer>
+    );
 
     const playButton = audioPlayer.find(`.track__button`);
 

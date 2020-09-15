@@ -19,7 +19,8 @@ describe(`The element is rendered correctly`, () => {
     .create(<Mistakes
       mistakes = {2}
       errorCount = {3}
-    />);
+    />)
+    .toJSON();
 
     expect(mistakesElement).toMatchSnapshot();
   });

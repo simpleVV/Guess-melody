@@ -35,6 +35,7 @@ describe(`The component is rendered correctly`, () => {
       renderPlayer = {jest.fn()}
       onChange = {jest.fn()}
       userAnswers = {mockAnswers}
+      screenIndex = {0}
     />)
     .toJSON();
 
