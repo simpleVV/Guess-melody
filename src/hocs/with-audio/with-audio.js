@@ -40,13 +40,7 @@ const withAudio = (Component) => {
     componentDidUpdate() {
       const audio = this._audioRef.current;
 
-      if (this.props.isPlaying) {
-        audio.play();
-      } else {
-        if (audio && audio.pause) {
-          audio.pause();
-        }
-      }
+      return (this.props.isPlaying) ? audio.play() : audio.pause();
     }
 
     componentWillUnmount() {

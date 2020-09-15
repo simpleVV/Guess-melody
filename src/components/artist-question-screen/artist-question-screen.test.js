@@ -32,6 +32,7 @@ describe(`The component is rendered correctly`, () => {
       question = {question}
       onAnswer = {jest.fn()}
       renderPlayer = {jest.fn()}
+      screenIndex = {1}
     />)
     .toJSON();
 

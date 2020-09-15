@@ -45,8 +45,8 @@ const GenreQuestionScreen = (props) => {
 };
 
 GenreQuestionScreen.propTypes = {
-  userAnswers: PropTypes.arrayOf(PropTypes.bool),
-  screenIndex: PropTypes.number,
+  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  screenIndex: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   renderPlayer: GenreItem.propTypes.renderPlayer,
@@ -62,7 +62,7 @@ GenreQuestionScreen.propTypes = {
                 }
             ))
       }
-  )
+  ).isRequired
 };
 
 export default GenreQuestionScreen;
