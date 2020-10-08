@@ -14,18 +14,16 @@ const ArtistQuestionScreen = (props) => {
     answers
   } = question;
 
-  const PLAYER_INDEX = 0;
-
   return (
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
-        {renderPlayer(song, PLAYER_INDEX)}
+        {renderPlayer(song, screenIndex)}
       </div>
 
       <form className="game__artist">
         {answers.map((answer, i) => {
-          return <div key = {`${screenIndex}-answer + ${i}`} className="artist">
+          return <div key = {`${screenIndex}-answer.artist + ${i}`} className="artist">
             <input
               className="artist__input visually-hidden"
               type="radio"
@@ -58,7 +56,7 @@ ArtistQuestionScreen.propTypes = {
         type: PropTypes.oneOf([`artist`]),
         song: PropTypes.shape(
             {
-              artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`]),
+              artist: PropTypes.string.isRequired,
               src: PropTypes.string,
             }
         ).isRequired,
@@ -66,7 +64,7 @@ ArtistQuestionScreen.propTypes = {
             PropTypes.shape(
                 {
                   picture: PropTypes.string,
-                  artist: PropTypes.oneOf([`Jim Beam`, `John Snow`, `Jack Daniels`])
+                  artist: PropTypes.string.isRequired
                 }
             )).isRequired
       }

@@ -53,12 +53,12 @@ const withUserAnswer = (Component) => {
     question: PropTypes.shape(
         {
           type: PropTypes.oneOf([`genre`]),
-          genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]),
+          genre: PropTypes.string.isRequired,
           answers: PropTypes.arrayOf(
               PropTypes.shape(
                   {
                     src: PropTypes.string,
-                    genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
+                    genre: PropTypes.string.isRequired
                   }
               ))
         }

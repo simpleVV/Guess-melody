@@ -101,11 +101,12 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  mistakes: state.mistakes,
-  gameTime: state.gameTime,
-  minutes: state.minutes,
-  errorCount: state.errorCount
+  step: state.game.step,
+  mistakes: state.game.mistakes,
+  gameTime: state.game.gameTime,
+  minutes: state.game.minutes,
+  errorCount: state.game.errorCount,
+  questions: state.data.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({

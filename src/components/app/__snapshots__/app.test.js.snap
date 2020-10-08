@@ -489,7 +489,7 @@ exports[`The component is rendered correctly App correctly renders welcome scree
     </li>
     <li>
       Можно допустить 
-      4
+      3
        ошибки.
     </li>
   </ul>

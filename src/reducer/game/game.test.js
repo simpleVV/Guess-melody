@@ -1,13 +1,13 @@
-import reducer from './reducer.js';
+import {reducer, ActionType} from './game.js';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
-    expect(reducer(undefined, {})).toEqual({
+    expect(reducer(void 0, {})).toEqual({
       step: -1,
       mistakes: 0,
       minutes: 5,
       gameTime: 300000,
-      errorCount: 3
+      errorCount: 3,
     });
   });
 
@@ -17,7 +17,7 @@ describe(`Reducer works correctly`, () => {
       mistakes: 0
     },
     {
-      type: `INCREMENT_STEP`,
+      type: ActionType.INCREMENT_STEP,
       payload: 1
     }
     )).toEqual({
@@ -30,7 +30,7 @@ describe(`Reducer works correctly`, () => {
       mistakes: 0
     },
     {
-      type: `INCREMENT_STEP`,
+      type: ActionType.INCREMENT_STEP,
       payload: 0
     })).toEqual({
       step: -1,
@@ -44,7 +44,7 @@ describe(`Reducer works correctly`, () => {
       mistakes: 0
     },
     {
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 1
     }
     )).toEqual({
@@ -57,7 +57,7 @@ describe(`Reducer works correctly`, () => {
       mistakes: 0
     },
     {
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 0
     }
     )).toEqual({
@@ -72,14 +72,14 @@ describe(`Reducer works correctly`, () => {
       mistakes: 10
     },
     {
-      type: `RESET`
+      type: ActionType.RESET
     }
     )).toEqual({
       step: -1,
       mistakes: 0,
       minutes: 5,
       gameTime: 300000,
-      errorCount: 3
+      errorCount: 3,
     });
   });
 
@@ -89,10 +89,10 @@ describe(`Reducer works correctly`, () => {
       mistakes: 3,
       minutes: 5,
       gameTimeMin: 3,
-      gameTime: 180000
+      gameTime: 180000,
     },
     {
-      type: `DECREMENT_TIME`,
+      type: ActionType.DECREMENT_TIME,
       payload: 1000
     }
     )).toEqual({
@@ -100,7 +100,7 @@ describe(`Reducer works correctly`, () => {
       mistakes: 3,
       minutes: 5,
       gameTimeMin: 3,
-      gameTime: 179000
+      gameTime: 179000,
     });
   });
 });

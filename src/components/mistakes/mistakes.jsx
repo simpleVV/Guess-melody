@@ -34,8 +34,8 @@ Mistakes.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  mistakes: state.mistakes,
-  errorCount: state.errorCount
+  mistakes: state.game.mistakes,
+  errorCount: state.game.errorCount
 });
 
 export {Mistakes};

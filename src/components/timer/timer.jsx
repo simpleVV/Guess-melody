@@ -65,7 +65,7 @@ Timer.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  gameTime: state.gameTime,
+  gameTime: state.game.gameTime,
 });
 
 const mapDispatchToProps = (dispatch) => ({

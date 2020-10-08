@@ -17,9 +17,11 @@ const ActionCreator = {
     const mistakeStep = 1;
 
     switch (question.type) {
+
       case `artist`:
         answerIsCorrect = isArtistAnswerCorrect(userAnswer, question);
         break;
+
       case `genre`:
         answerIsCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
@@ -46,11 +48,35 @@ const ActionCreator = {
 
   reset: () => ({
     type: `RESET`
-  })
+  }),
+
+  loadQuestions: (questions) => {
+    return {
+      type: `LOAD_QUESTIONS`,
+      payload: questions
+    };
+  },
+
+  requireAuthorization: (status) => {
+    return {
+      type: `REQUIRE_AUTHORIZATION`,
+      payload: status
+    };
+  }
+};
+
+const Operation = {
+  loadQuestions: () => (dispatch, getState, api) => {
+    return api.get(`/questions`)
+    .then((response) => {
+      dispatch(ActionCreator.loadQuestions(response.data));
+    });
+  }
 };
 
 export {
   isArtistAnswerCorrect,
   isGenreAnswerCorrect,
   ActionCreator,
+  Operation
 };
