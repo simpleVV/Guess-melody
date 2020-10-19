@@ -11,7 +11,8 @@ const store = mockStore({
   game: {
     gameTime: 300000,
     mistakes: 0,
-    errorCount: 3
+    errorCount: 3,
+    isAuthorizationRequired: false
   }
 });
 
@@ -82,6 +83,7 @@ describe(`The component is rendered correctly`, () => {
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
         onReset = {jest.fn()}
+        isAuthorizationRequired = {false}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -102,6 +104,7 @@ describe(`The component is rendered correctly`, () => {
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               onReset = {jest.fn()}
+              isAuthorizationRequired = {false}
             />
           </Provider
           >).toJSON();
@@ -124,6 +127,7 @@ describe(`The component is rendered correctly`, () => {
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               onReset = {jest.fn()}
+              isAuthorizationRequired = {false}
             />
           </Provider
           >).toJSON();
@@ -144,7 +148,31 @@ describe(`The component is rendered correctly`, () => {
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
         onReset = {jest.fn()}
+        isAuthorizationRequired = {false}
       />).toJSON();
+
+    expect(appComponent).toMatchSnapshot();
+  });
+
+  it(`App correctly renders authorization screen`, () => {
+    const {questions} = mockQuestions;
+    const appComponent = renderer
+      .create(
+          <Provider store = {store}>
+            <App
+              step = {0}
+              mistakes = {0}
+              gameTime = {300000}
+              minutes = {5}
+              errorCount = {3}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              onReset = {jest.fn()}
+              isAuthorizationRequired = {true}
+            />
+          </Provider
+          >).toJSON();
 
     expect(appComponent).toMatchSnapshot();
   });

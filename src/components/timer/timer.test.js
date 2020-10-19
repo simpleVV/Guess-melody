@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import {Timer} from './timer.jsx';
 
 const mockTimeInMilSec = 300000;

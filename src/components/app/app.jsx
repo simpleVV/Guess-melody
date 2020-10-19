@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/action-creator.js';
 
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import FailTime from '../fail-time/fail-time.jsx';
@@ -29,6 +30,11 @@ class App extends PureComponent {
   }
 
   _getScreen(question, gameTime) {
+    const {isAuthorizationRequired} = this.props;
+
+    if (isAuthorizationRequired) {
+      return <AuthorizationScreen/>;
+    }
     if (!question) {
       const {
         errorCount,
@@ -97,7 +103,8 @@ App.propTypes = {
       PropTypes.shape(
           ArtistQuestionScreen.question,
           GenreQuestionScreen.question)
-  ).isRequired
+  ).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -106,7 +113,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   gameTime: state.game.gameTime,
   minutes: state.game.minutes,
   errorCount: state.game.errorCount,
-  questions: state.data.questions
+  questions: state.data.questions,
+  isAuthorizationRequired: state.user.isAuthorizationRequired
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -115,7 +123,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
   },
-  onReset: () => dispatch(ActionCreator.reset())
+  onReset: () => dispatch(ActionCreator.reset()),
+  // login: (userData) => dispatch(Operation.login(userData))
 });
 
 export {App};

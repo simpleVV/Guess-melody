@@ -71,6 +71,16 @@ const Operation = {
     .then((response) => {
       dispatch(ActionCreator.loadQuestions(response.data));
     });
+  },
+
+  login: (userData) => (dispatch, getState, api) => {
+    return api.post(`/login`, {
+      email: userData.email,
+      password: userData.password
+    })
+    .then(() => {
+      dispatch(ActionCreator.requireAuthorization(false));
+    });
   }
 };
 

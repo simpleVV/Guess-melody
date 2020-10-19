@@ -246,4 +246,28 @@ describe(`Action creator work correctly`, () => {
         });
       });
   });
+
+  it(`Should successfully authorize the user then API call to /login`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const mockUserData = {
+      email: `bob@mail.ru`,
+      password: `123`
+    };
+    const login = Operation.login(mockUserData);
+
+    apiMock
+      .onPost(`/login`)
+      .reply(200);
+
+    return login(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `REQUIRE_AUTHORIZATION`,
+          payload: false
+        });
+      });
+  });
+
 });
