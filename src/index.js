@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer/reducer.js';
 import questions from './mocks/questions.js';
@@ -8,6 +7,10 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import createAPI from './api.js';
 import {Operation} from './reducer/action-creator.js';
+import {
+  createStore,
+  applyMiddleware
+} from 'redux';
 
 import App from './components/app/app.jsx';
 

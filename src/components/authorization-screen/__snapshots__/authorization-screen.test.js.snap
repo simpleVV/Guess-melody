@@ -42,7 +42,8 @@ exports[`The component is rendered correctly AuthorizationScreen correctly rende
         className="login__input"
         id="name"
         name="name"
-        type="text"
+        required={true}
+        type="email"
       />
     </p>
     <p
@@ -58,7 +59,8 @@ exports[`The component is rendered correctly AuthorizationScreen correctly rende
         className="login__input"
         id="password"
         name="password"
-        type="text"
+        required={true}
+        type="password"
       />
       <span
         className="login__error"

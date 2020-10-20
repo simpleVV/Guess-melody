@@ -1,4 +1,7 @@
-import {reducer, ActionType} from './data.js';
+import {
+  reducer,
+  ActionType
+} from './data.js';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {

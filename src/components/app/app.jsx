@@ -35,6 +35,7 @@ class App extends PureComponent {
     if (isAuthorizationRequired) {
       return <AuthorizationScreen/>;
     }
+
     if (!question) {
       const {
         errorCount,
@@ -50,11 +51,7 @@ class App extends PureComponent {
     }
 
     if (gameTime <= 0) {
-      const {onReset} = this.props;
-
-      return <FailTime
-        onReplayButtonClick = {onReset}
-      />;
+      return <FailTime/>;
     }
 
     const {
@@ -98,7 +95,6 @@ App.propTypes = {
   minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(
       PropTypes.shape(
           ArtistQuestionScreen.question,
@@ -123,8 +119,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
   },
-  onReset: () => dispatch(ActionCreator.reset()),
-  // login: (userData) => dispatch(Operation.login(userData))
 });
 
 export {App};

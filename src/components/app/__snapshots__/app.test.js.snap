@@ -217,7 +217,8 @@ exports[`The component is rendered correctly App correctly renders authorization
         className="login__input"
         id="name"
         name="name"
-        type="text"
+        required={true}
+        type="email"
       />
     </p>
     <p
@@ -233,7 +234,8 @@ exports[`The component is rendered correctly App correctly renders authorization
         className="login__input"
         id="password"
         name="password"
-        type="text"
+        required={true}
+        type="password"
       />
       <span
         className="login__error"
@@ -284,7 +286,7 @@ exports[`The component is rendered correctly App correctly renders end-time scre
   </p>
   <button
     className="replay"
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   >
     Попробовать ещё раз

@@ -1,11 +1,11 @@
 import createAPI from '../api.js';
+import MockAdapter from 'axios-mock-adapter';
 import {
   ActionCreator,
   isGenreAnswerCorrect,
   isArtistAnswerCorrect,
   Operation
 } from './action-creator.js';
-import MockAdapter from 'axios-mock-adapter';
 
 const api = createAPI(() => {});
 

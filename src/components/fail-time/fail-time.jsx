@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer/action-creator.js';
 
 const FailTime = (props) => {
-  const {onReplayButtonClick} = props;
+  const {onReset} = props;
 
   return (
     <section className="result">
@@ -12,14 +14,21 @@ const FailTime = (props) => {
       <button
         className="replay"
         type="button"
-        onClick = {onReplayButtonClick}>
+        onClick = {onReset}>
         Попробовать ещё раз</button>
     </section>
   );
 };
 
 FailTime.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired
+  onReset: PropTypes.func.isRequired
 };
 
-export default FailTime;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {});
+
+const mapDispatchToProps = (dispatch) => ({
+  onReset: () => dispatch(ActionCreator.reset())
+});
+
+export {FailTime};
+export default connect(mapStateToProps, mapDispatchToProps)(FailTime);

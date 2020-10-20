@@ -82,7 +82,6 @@ describe(`The component is rendered correctly`, () => {
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
-        onReset = {jest.fn()}
         isAuthorizationRequired = {false}
       />).toJSON();
 
@@ -103,7 +102,6 @@ describe(`The component is rendered correctly`, () => {
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
-              onReset = {jest.fn()}
               isAuthorizationRequired = {false}
             />
           </Provider
@@ -126,7 +124,6 @@ describe(`The component is rendered correctly`, () => {
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
-              onReset = {jest.fn()}
               isAuthorizationRequired = {false}
             />
           </Provider
@@ -138,18 +135,21 @@ describe(`The component is rendered correctly`, () => {
   it(`App correctly renders end-time screen`, () => {
     const {questions} = mockQuestions;
     const appComponent = renderer
-      .create(<App
-        step = {1}
-        mistakes = {0}
-        gameTime = {0}
-        minutes = {5}
-        errorCount = {3}
-        questions = {questions}
-        onUserAnswer = {jest.fn()}
-        onWelcomButtonClick = {jest.fn()}
-        onReset = {jest.fn()}
-        isAuthorizationRequired = {false}
-      />).toJSON();
+      .create(
+          <Provider store = {store}>
+            <App
+              step = {1}
+              mistakes = {0}
+              gameTime = {0}
+              minutes = {5}
+              errorCount = {3}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              isAuthorizationRequired = {false}
+            />
+          </Provider
+          >).toJSON();
 
     expect(appComponent).toMatchSnapshot();
   });
@@ -168,7 +168,6 @@ describe(`The component is rendered correctly`, () => {
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
-              onReset = {jest.fn()}
               isAuthorizationRequired = {true}
             />
           </Provider

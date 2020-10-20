@@ -37,20 +37,22 @@ class AuthorizationScreen extends PureComponent {
             <label className="login__label" htmlFor="name">Логин</label>
             <input
               className="login__input"
-              type="text"
+              type="email"
               name="name"
               id="name"
               ref = {this._loginRef}
+              required
             />
           </p>
           <p className="login__field">
             <label className="login__label" htmlFor="password">Пароль</label>
             <input
               className="login__input"
-              type="text"
+              type="password"
               name="password"
               id="password"
               ref = {this._passwordRef}
+              required
             />
             <span className="login__error">Неверный пароль</span>
           </p>
