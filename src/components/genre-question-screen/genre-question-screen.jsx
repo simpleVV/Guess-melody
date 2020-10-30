@@ -29,7 +29,7 @@ const GenreQuestionScreen = (props) => {
         {answers.map((answer, i) => {
           return (
             <GenreItem
-              key = {`${screenIndex}-answer.genre + ${i}`}
+              key = {`${i} - ${answer.src}`}
               renderPlayer = {renderPlayer}
               screenIndex = {screenIndex}
               answer = {answer}

@@ -46,7 +46,7 @@ const withAudio = (Component) => {
     componentWillUnmount() {
       const audio = this._audioRef.current;
 
-      audio.oncanplaythrough = null;
+      audio.oncanplay = null;
       audio.onplay = null;
       audio.onpause = null;
       audio.src = null;

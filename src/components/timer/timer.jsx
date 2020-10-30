@@ -3,6 +3,7 @@ import {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/action-creator.js';
+import {getGameTime} from '../../reducer/game/selectors.js';
 
 class Timer extends PureComponent {
   constructor(props) {
@@ -65,7 +66,7 @@ Timer.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  gameTime: state.game.gameTime,
+  gameTime: getGameTime(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

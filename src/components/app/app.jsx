@@ -3,6 +3,15 @@ import {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/action-creator.js';
+import {getQuestions} from '../../reducer/data/selectors.js';
+import {getAuthorizationUser} from '../../reducer/user/selectors.js';
+import {
+  getStep,
+  getMistakes,
+  getErrorCount,
+  getGameTime,
+  getMinutes
+} from '../../reducer/game/selectors.js';
 
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
@@ -104,13 +113,13 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.game.step,
-  mistakes: state.game.mistakes,
-  gameTime: state.game.gameTime,
-  minutes: state.game.minutes,
-  errorCount: state.game.errorCount,
-  questions: state.data.questions,
-  isAuthorizationRequired: state.user.isAuthorizationRequired
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  gameTime: getGameTime(state),
+  minutes: getMinutes(state),
+  errorCount: getErrorCount(state),
+  questions: getQuestions(state),
+  isAuthorizationRequired: getAuthorizationUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

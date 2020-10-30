@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import reducer from './reducer/reducer.js';
-import questions from './mocks/questions.js';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 import createAPI from './api.js';
@@ -29,11 +28,10 @@ const init = () => {
 
   ReactDOM.render(
       <Provider store = {store}>
-        <App
-        />
+        <App/>
       </Provider>,
       document.querySelector(`#root`)
   );
 };
 
-init(questions);
+init();

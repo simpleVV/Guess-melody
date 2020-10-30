@@ -7,8 +7,10 @@ const withUserAnswer = (Component) => {
     constructor(props) {
       super(props);
 
+      this.initialState = new Array(props.question.answers.length).fill(false);
+
       this.state = {
-        answers: new Array(props.question.answers.length).fill(false)
+        answers: this.initialState
       };
 
       this.answerHandler = this.answerHandler.bind(this);
@@ -29,14 +31,17 @@ const withUserAnswer = (Component) => {
     }
 
     answerHandler() {
+      const {answers} = this.state;
       const {
         question,
         onAnswer
       } = this.props;
 
-      const {answers} = this.state;
-
       onAnswer(answers, question);
+
+      this.setState({
+        answers: this.initialState
+      });
     }
 
     changeHandler(index) {
