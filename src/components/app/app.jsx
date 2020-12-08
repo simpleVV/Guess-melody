@@ -1,13 +1,17 @@
 import React from 'react';
 import {PureComponent} from 'react';
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/action-creator.js';
+import {GameActionCreator} from '../../reducer/game/game-action-creator.js';
 import {getQuestions} from '../../reducer/data/selectors.js';
 import {getAuthorizationUser} from '../../reducer/user/selectors.js';
 import {
   getStep,
-  getMistakes,
   getErrorCount,
   getGameTime,
   getMinutes
@@ -34,7 +38,16 @@ class App extends PureComponent {
     } = this.props;
 
     return (
-      this._getScreen(questions[step], gameTime)
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+            {this._getScreen(questions[step], gameTime)}
+          </Route>
+          <Route path='/auth' exact>
+            <AuthorizationScreen/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 
@@ -60,7 +73,10 @@ class App extends PureComponent {
     }
 
     if (gameTime <= 0) {
-      return <FailTime/>;
+      const {onReset} = this.props;
+      return <FailTime
+        onReset ={onReset}
+      />;
     }
 
     const {
@@ -99,7 +115,6 @@ class App extends PureComponent {
 App.propTypes = {
   step: PropTypes.number.isRequired,
   gameTime: PropTypes.number.isRequired,
-  mistakes: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
@@ -109,12 +124,12 @@ App.propTypes = {
           ArtistQuestionScreen.question,
           GenreQuestionScreen.question)
   ).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onReset: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: getStep(state),
-  mistakes: getMistakes(state),
   gameTime: getGameTime(state),
   minutes: getMinutes(state),
   errorCount: getErrorCount(state),
@@ -123,11 +138,12 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onWelcomButtonClick: () => dispatch(ActionCreator.incrementStep()),
+  onWelcomButtonClick: () => dispatch(GameActionCreator.incrementStep()),
   onUserAnswer: (userAnswer, question, mistakes, maxMistakes) => {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
+    dispatch(GameActionCreator.incrementStep());
+    dispatch(GameActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
   },
+  onReset: () => dispatch(GameActionCreator.reset()),
 });
 
 export {App};

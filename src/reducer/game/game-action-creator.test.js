@@ -1,13 +1,10 @@
-import createAPI from '../api.js';
-import MockAdapter from 'axios-mock-adapter';
+import {ActionType} from './game.js';
+
 import {
-  ActionCreator,
+  GameActionCreator,
   isGenreAnswerCorrect,
   isArtistAnswerCorrect,
-  Operation
-} from './action-creator.js';
-
-const api = createAPI(() => {});
+} from './game-action-creator.js';
 
 describe(`Business logic is correct`, () => {
   it(`Genre answer is checked correctly`, () => {
@@ -71,8 +68,8 @@ describe(`Business logic is correct`, () => {
 
 describe(`Action creator work correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {
-    expect(ActionCreator.incrementStep()).toEqual({
-      type: `INCREMENT_STEP`,
+    expect(GameActionCreator.incrementStep()).toEqual({
+      type: ActionType.INCREMENT_STEP,
       payload: 1
     });
   });
@@ -102,9 +99,9 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 0
     });
   });
@@ -134,9 +131,9 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 1
     });
   });
@@ -166,108 +163,23 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
     .toEqual({
-      type: `RESET`
+      type: ActionType.RESET
     });
   });
 
   it(`Action creator decrement time return action with 1000 payload`, () => {
-    expect(ActionCreator.decrementTime(10000)).toEqual({
-      type: `DECREMENT_TIME`,
+    expect(GameActionCreator.decrementTime(10000)).toEqual({
+      type: ActionType.DECREMENT_TIME,
       payload: 1000
     });
   });
 
   it(`Action creator correctly reset state`, () => {
-    expect(ActionCreator.reset())
+    expect(GameActionCreator.reset())
      .toEqual({
-       type: `RESET`
+       type: ActionType.RESET
      });
   });
-
-  it(`Action creator correctly load questions`, () => {
-    const mockQuestions = [
-      {
-        type: `genre`,
-        genre: `rock`,
-        answers: [
-          {
-            src: `https://upload.wikimedia.org/wikipedia/commons/6/64/Ugandan_national_anthem%2C_performed_by_the_U.S._Navy_Band.ogg`,
-            genre: `rock`
-          }
-        ]
-      },
-      {
-        type: `artist`,
-        song: {
-          artist: `Jim Beam`,
-          src: `https://upload.wikimedia.org/wikipedia/commons/6/64/Ugandan_national_anthem%2C_performed_by_the_U.S._Navy_Band.ogg`,
-        },
-        answers: [
-          {
-            picture: `http://placehold.it/134x134`,
-            artist: `Jim Beam`
-          },
-        ]
-      },
-    ];
-
-    expect(ActionCreator.loadQuestions(mockQuestions))
-      .toEqual({
-        type: `LOAD_QUESTIONS`,
-        payload: mockQuestions
-      });
-  });
-
-  it(`Should make a correct API call to /questions`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const questionLoader = Operation.loadQuestions();
-
-    apiMock
-      .onGet(`/questions`)
-      .reply(200, [
-        {
-          fake: true
-        }
-      ]);
-
-    return questionLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `LOAD_QUESTIONS`,
-          payload: [
-            {
-              fake: true
-            }
-          ]
-        });
-      });
-  });
-
-  it(`Should successfully authorize the user then API call to /login`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const mockUserData = {
-      email: `bob@mail.ru`,
-      password: `123`
-    };
-    const login = Operation.login(mockUserData);
-
-    apiMock
-      .onPost(`/login`)
-      .reply(200);
-
-    return login(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `REQUIRE_AUTHORIZATION`,
-          payload: false
-        });
-      });
-  });
-
 });

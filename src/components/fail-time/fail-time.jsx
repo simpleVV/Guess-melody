@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/action-creator.js';
 
 const FailTime = (props) => {
   const {onReset} = props;
@@ -24,11 +22,4 @@ FailTime.propTypes = {
   onReset: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {});
-
-const mapDispatchToProps = (dispatch) => ({
-  onReset: () => dispatch(ActionCreator.reset())
-});
-
-export {FailTime};
-export default connect(mapStateToProps, mapDispatchToProps)(FailTime);
+export default FailTime;

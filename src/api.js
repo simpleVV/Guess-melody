@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ActionCreator} from './reducer/action-creator.js';
+import {UserActionCreator} from './reducer/user/user-action-creator.js';
 
 const Error = {
   UNAUTHORIZED: 401
@@ -16,7 +16,7 @@ const createAPI = (dispatch) => {
 
   const onFail = (err) => {
     if (err.response.status === Error.UNAUTHORIZED) {
-      dispatch(ActionCreator.requireAuthorization(true));
+      dispatch(UserActionCreator.requireAuthorization(true));
     }
 
     return err;

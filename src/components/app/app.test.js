@@ -8,7 +8,7 @@ import {App} from './app.jsx';
 const mockStore = configureStore([]);
 
 const store = mockStore({
-  game: {
+  GAME: {
     gameTime: 300000,
     mistakes: 0,
     errorCount: 3,
@@ -75,7 +75,6 @@ describe(`The component is rendered correctly`, () => {
     const appComponent = renderer
       .create(<App
         step = {-1}
-        mistakes = {0}
         gameTime = {300000}
         minutes = {5}
         errorCount = {3}
@@ -83,6 +82,7 @@ describe(`The component is rendered correctly`, () => {
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
         isAuthorizationRequired = {false}
+        onReset = {jest.fn()}
       />).toJSON();
 
     expect(appComponent).toMatchSnapshot();
@@ -95,7 +95,6 @@ describe(`The component is rendered correctly`, () => {
           <Provider store = {store}>
             <App
               step = {0}
-              mistakes = {0}
               gameTime = {300000}
               minutes = {5}
               errorCount = {3}
@@ -103,6 +102,7 @@ describe(`The component is rendered correctly`, () => {
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               isAuthorizationRequired = {false}
+              onReset = {jest.fn()}
             />
           </Provider
           >).toJSON();
@@ -117,7 +117,6 @@ describe(`The component is rendered correctly`, () => {
           <Provider store = {store}>
             <App
               step = {1}
-              mistakes = {0}
               gameTime = {300000}
               minutes = {5}
               errorCount = {3}
@@ -125,6 +124,7 @@ describe(`The component is rendered correctly`, () => {
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               isAuthorizationRequired = {false}
+              onReset = {jest.fn()}
             />
           </Provider
           >).toJSON();
@@ -139,7 +139,6 @@ describe(`The component is rendered correctly`, () => {
           <Provider store = {store}>
             <App
               step = {1}
-              mistakes = {0}
               gameTime = {0}
               minutes = {5}
               errorCount = {3}
@@ -147,6 +146,7 @@ describe(`The component is rendered correctly`, () => {
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               isAuthorizationRequired = {false}
+              onReset = {jest.fn()}
             />
           </Provider
           >).toJSON();
@@ -160,15 +160,15 @@ describe(`The component is rendered correctly`, () => {
       .create(
           <Provider store = {store}>
             <App
-              step = {0}
-              mistakes = {0}
-              gameTime = {300000}
+              step = {1}
+              gameTime = {0}
               minutes = {5}
               errorCount = {3}
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
               isAuthorizationRequired = {true}
+              onReset = {jest.fn()}
             />
           </Provider
           >).toJSON();

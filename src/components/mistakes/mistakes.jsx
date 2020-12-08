@@ -1,10 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {
-  getMistakes,
-  getErrorCount
-} from '../../reducer/game/selectors.js';
 
 const Mistakes = (props) => {
   const {
@@ -37,10 +32,4 @@ Mistakes.propTypes = {
   errorCount: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  mistakes: getMistakes(state),
-  errorCount: getErrorCount(state)
-});
-
-export {Mistakes};
-export default connect(mapStateToProps)(Mistakes);
+export default Mistakes;

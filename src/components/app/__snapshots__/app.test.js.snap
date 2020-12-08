@@ -286,7 +286,7 @@ exports[`The component is rendered correctly App correctly renders end-time scre
   </p>
   <button
     className="replay"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     type="button"
   >
     Попробовать ещё раз

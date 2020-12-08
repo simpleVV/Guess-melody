@@ -6,13 +6,13 @@ import {AuthorizationScreen} from './authorization-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const onResetHandler = jest.fn();
+const resetHandler = jest.fn();
 const loginHandler = jest.fn();
 
 describe(`The component interactivity`, () => {
   it(`Calls callback when user click on replay button`, () => {
     const authorizationScreen = mount(<AuthorizationScreen
-      onReset = {onResetHandler}
+      onReset = {resetHandler}
       login = {loginHandler}
     />);
 
@@ -20,12 +20,12 @@ describe(`The component interactivity`, () => {
 
     replayButton.simulate(`click`);
 
-    expect(onResetHandler).toHaveBeenCalledTimes(1);
+    expect(resetHandler).toHaveBeenCalledTimes(1);
   });
 
   it(`Calls callback when user submit form`, () => {
     const authorizationScreen = mount(<AuthorizationScreen
-      onReset = {onResetHandler}
+      onReset = {resetHandler}
       login = {loginHandler}
     />);
 

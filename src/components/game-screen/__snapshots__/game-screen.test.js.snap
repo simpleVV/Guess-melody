@@ -48,7 +48,7 @@ exports[`The component is rendered correctly With type artist 1`] = `
       <span
         className="timer__mins"
       >
-        05
+        00
       </span>
       <span
         className="timer__dots"
@@ -58,7 +58,7 @@ exports[`The component is rendered correctly With type artist 1`] = `
       <span
         className="timer__secs"
       >
-        00
+        03
       </span>
     </div>
     <div
@@ -72,6 +72,9 @@ exports[`The component is rendered correctly With type artist 1`] = `
       />
       <div
         className="correct"
+      />
+      <div
+        className="wrong"
       />
     </div>
   </header>
@@ -129,7 +132,7 @@ exports[`The component is rendered correctly With type genre 1`] = `
       <span
         className="timer__mins"
       >
-        05
+        00
       </span>
       <span
         className="timer__dots"
@@ -139,7 +142,7 @@ exports[`The component is rendered correctly With type genre 1`] = `
       <span
         className="timer__secs"
       >
-        00
+        03
       </span>
     </div>
     <div
@@ -153,6 +156,9 @@ exports[`The component is rendered correctly With type genre 1`] = `
       />
       <div
         className="correct"
+      />
+      <div
+        className="wrong"
       />
     </div>
   </header>

@@ -2,10 +2,8 @@ import React from 'react';
 import {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  ActionCreator,
-  Operation
-} from '../../reducer/action-creator.js';
+import {GameActionCreator} from '../../reducer/game/game-action-creator.js';
+import {Operation} from '../../reducer/user/user-action-creator.js';
 
 class AuthorizationScreen extends PureComponent {
   constructor(props) {
@@ -14,7 +12,7 @@ class AuthorizationScreen extends PureComponent {
     this._loginRef = React.createRef();
     this._passwordRef = React.createRef();
 
-    this._onSubmitHandler = this._onSubmitHandler.bind(this);
+    this._submitHandler = this._submitHandler.bind(this);
   }
 
   render() {
@@ -30,7 +28,7 @@ class AuthorizationScreen extends PureComponent {
           action=""
           onSubmit = {(evt) => {
             evt.preventDefault();
-            this._onSubmitHandler();
+            this._submitHandler();
           }}
         >
           <p className="login__field">
@@ -74,7 +72,7 @@ class AuthorizationScreen extends PureComponent {
     );
   }
 
-  _onSubmitHandler() {
+  _submitHandler() {
     const {
       login
     } = this.props;
@@ -96,7 +94,7 @@ AuthorizationScreen.propTypes = {
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {});
 
 const mapDispatchToProps = (dispatch) => ({
-  onReset: () => dispatch(ActionCreator.reset()),
+  onReset: () => dispatch(GameActionCreator.reset()),
   login: (userData) => dispatch(Operation.login(userData))
 });
 
