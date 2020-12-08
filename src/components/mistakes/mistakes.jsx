@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 const Mistakes = (props) => {
   const {
@@ -33,10 +32,4 @@ Mistakes.propTypes = {
   errorCount: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  mistakes: state.mistakes,
-  errorCount: state.errorCount
-});
-
-export {Mistakes};
-export default connect(mapStateToProps)(Mistakes);
+export default Mistakes;

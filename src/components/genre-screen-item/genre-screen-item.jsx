@@ -7,12 +7,15 @@ const GenreItem = (props) => {
     id,
     renderPlayer,
     userAnswer,
-    onChange
+    onChange,
+    screenIndex
   } = props;
+
+  const playerId = id + screenIndex;
 
   return (
     <div className="track">
-      {renderPlayer(answer, id)}
+      {renderPlayer(answer, playerId)}
       <div className="game__answer">
         <input
           className="game__input visually-hidden"
@@ -21,7 +24,9 @@ const GenreItem = (props) => {
           checked = {userAnswer}
           value = {`answer-${id}`}
           id = {`answer-${id}`}
-          onChange = {() => onChange(id)}/>
+          onChange = {
+            () => onChange(id)
+          }/>
         <label
           className="game__check"
           htmlFor = {`answer-${id}`}>
@@ -35,12 +40,13 @@ const GenreItem = (props) => {
 GenreItem.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  screenIndex: PropTypes.number.isRequired,
   userAnswer: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   answer: PropTypes.shape(
       {
         src: PropTypes.string,
-        genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
+        genre: PropTypes.string.isRequired
       }
   ).isRequired
 };

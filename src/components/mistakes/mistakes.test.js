@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {Mistakes} from './mistakes.jsx';
+import Mistakes from './mistakes.jsx';
 
 describe(`The element is rendered correctly`, () => {
   it(`Mistakes element correctly renders if all answers correct`, () => {

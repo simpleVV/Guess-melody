@@ -27,6 +27,7 @@ const withActivePlayer = (Component) => {
           renderPlayer = {(audio, i) => {
             return (
               <AudioPlayerWrapped
+                key = {i}
                 src={audio.src}
                 isPlaying={i === activePlayer}
                 onPlayButtonClick={() => this._playButtonClickHandler(i)}

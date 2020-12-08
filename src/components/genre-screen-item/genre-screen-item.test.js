@@ -15,6 +15,7 @@ describe(`The component is rendered correctly`, () => {
       answer = {mockAnswer}
       id = {0}
       renderPlayer = {jest.fn()}
+      screenIndex = {10}
       userAnswer = {false}
       onAnswerChange = {jest.fn()}
       onChange = {jest.fn()}

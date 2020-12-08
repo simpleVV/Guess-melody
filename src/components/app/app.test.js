@@ -1,15 +1,20 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import configureStore from 'redux-mock-store';
 
 import {App} from './app.jsx';
 
-const mockStore = createStore(() => ({
-  mistakes: 0,
-  errorCount: 3,
-  gameTime: 300000,
-}));
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  GAME: {
+    gameTime: 300000,
+    mistakes: 0,
+    errorCount: 3,
+    isAuthorizationRequired: false
+  }
+});
 
 const mockQuestions = {
   questions: [
@@ -64,29 +69,19 @@ const mockQuestions = {
   ]
 };
 
-const settings = {
-  time: 7,
-  errorCount: 4
-};
-
 describe(`The component is rendered correctly`, () => {
   it(`App correctly renders welcome screem`, () => {
     const {questions} = mockQuestions;
-    const {
-      time,
-      errorCount
-    } = settings;
-
     const appComponent = renderer
       .create(<App
         step = {-1}
-        mistakes = {0}
-        gameTime = {time}
+        gameTime = {300000}
         minutes = {5}
-        errorCount = {errorCount}
+        errorCount = {3}
         questions = {questions}
         onUserAnswer = {jest.fn()}
         onWelcomButtonClick = {jest.fn()}
+        isAuthorizationRequired = {false}
         onReset = {jest.fn()}
       />).toJSON();
 
@@ -95,23 +90,18 @@ describe(`The component is rendered correctly`, () => {
 
   it(`App correctly renders genre question screen`, () => {
     const {questions} = mockQuestions;
-    const {
-      time,
-      errorCount
-    } = settings;
-
     const appComponent = renderer
       .create(
-          <Provider store = {mockStore}>
+          <Provider store = {store}>
             <App
               step = {0}
-              mistakes = {0}
-              gameTime = {time}
+              gameTime = {300000}
               minutes = {5}
-              errorCount = {errorCount}
+              errorCount = {3}
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
+              isAuthorizationRequired = {false}
               onReset = {jest.fn()}
             />
           </Provider
@@ -122,23 +112,18 @@ describe(`The component is rendered correctly`, () => {
 
   it(`App correctly renders artist question screen`, () => {
     const {questions} = mockQuestions;
-    const {
-      time,
-      errorCount,
-    } = settings;
-
     const appComponent = renderer
       .create(
-          <Provider store = {mockStore}>
+          <Provider store = {store}>
             <App
               step = {1}
-              mistakes = {0}
-              gameTime = {time}
+              gameTime = {300000}
               minutes = {5}
-              errorCount = {errorCount}
+              errorCount = {3}
               questions = {questions}
               onUserAnswer = {jest.fn()}
               onWelcomButtonClick = {jest.fn()}
+              isAuthorizationRequired = {false}
               onReset = {jest.fn()}
             />
           </Provider
@@ -146,24 +131,47 @@ describe(`The component is rendered correctly`, () => {
 
     expect(appComponent).toMatchSnapshot();
   });
+
   it(`App correctly renders end-time screen`, () => {
     const {questions} = mockQuestions;
-    const {
-      errorCount,
-    } = settings;
-
     const appComponent = renderer
-      .create(<App
-        step = {1}
-        mistakes = {0}
-        gameTime = {0}
-        minutes = {5}
-        errorCount = {errorCount}
-        questions = {questions}
-        onUserAnswer = {jest.fn()}
-        onWelcomButtonClick = {jest.fn()}
-        onReset = {jest.fn()}
-      />).toJSON();
+      .create(
+          <Provider store = {store}>
+            <App
+              step = {1}
+              gameTime = {0}
+              minutes = {5}
+              errorCount = {3}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              isAuthorizationRequired = {false}
+              onReset = {jest.fn()}
+            />
+          </Provider
+          >).toJSON();
+
+    expect(appComponent).toMatchSnapshot();
+  });
+
+  it(`App correctly renders authorization screen`, () => {
+    const {questions} = mockQuestions;
+    const appComponent = renderer
+      .create(
+          <Provider store = {store}>
+            <App
+              step = {1}
+              gameTime = {0}
+              minutes = {5}
+              errorCount = {3}
+              questions = {questions}
+              onUserAnswer = {jest.fn()}
+              onWelcomButtonClick = {jest.fn()}
+              isAuthorizationRequired = {true}
+              onReset = {jest.fn()}
+            />
+          </Provider
+          >).toJSON();
 
     expect(appComponent).toMatchSnapshot();
   });

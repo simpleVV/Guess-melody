@@ -33,13 +33,13 @@ const mockQuestion = {
 };
 const MockComponent = () => <div />;
 const MockComponentWrapped = withUserAnswer(MockComponent);
-const onAnswerHandler = jest.fn();
+const answerHandler = jest.fn();
 
 describe(`The component interactivity`, () => {
   it(`Should change answers`, () => {
     const mockComponentWrapped = shallow(<MockComponentWrapped
       question = {mockQuestion}
-      onAnswer = {onAnswerHandler}
+      onAnswer = {answerHandler}
     />);
 
     expect(mockComponentWrapped.props().userAnswers).toEqual([false, false, false, false]);

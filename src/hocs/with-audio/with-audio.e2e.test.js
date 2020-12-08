@@ -32,11 +32,11 @@ MockPlayer.propTypes = {
 describe(`The component interactivity`, () => {
   it(`Turn on audio`, () => {
     const MockPlayerWrapped = withAudio(MockPlayer);
-    const onPlayButtonClickHandler = jest.fn();
+    const playButtonClickHandler = jest.fn();
     const mockPlayerWrapped = mount(<MockPlayerWrapped
       isPlaying = {true}
       src = {``}
-      onPlayButtonClick = {onPlayButtonClickHandler}
+      onPlayButtonClick = {playButtonClickHandler}
     />);
 
     window.HTMLMediaElement.prototype.play = () => {};
@@ -50,17 +50,17 @@ describe(`The component interactivity`, () => {
     const button = mockPlayerWrapped.find(`button`);
     button.simulate(`click`);
 
-    expect(onPlayButtonClickHandler).toHaveBeenCalledTimes(1);
+    expect(playButtonClickHandler).toHaveBeenCalledTimes(1);
     expect(_audioRef.current.play).toHaveBeenCalledTimes(1);
   });
 
   it(`Turn off audio`, () => {
     const MockPlayerWrapped = withAudio(MockPlayer);
-    const onPlayButtonClickHandler = jest.fn();
+    const playButtonClickHandler = jest.fn();
     const mockPlayerWrapped = mount(<MockPlayerWrapped
       isPlaying = {false}
       src = {``}
-      onPlayButtonClick = {onPlayButtonClickHandler}
+      onPlayButtonClick = {playButtonClickHandler}
     />);
 
     window.HTMLMediaElement.prototype.pause = () => {};
@@ -74,7 +74,7 @@ describe(`The component interactivity`, () => {
     const button = mockPlayerWrapped.find(`button`);
     button.simulate(`click`);
 
-    expect(onPlayButtonClickHandler).toHaveBeenCalledTimes(1);
+    expect(playButtonClickHandler).toHaveBeenCalledTimes(1);
     expect(_audioRef.current.pause).toHaveBeenCalledTimes(1);
   });
 });

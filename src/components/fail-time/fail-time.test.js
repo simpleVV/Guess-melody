@@ -6,7 +6,7 @@ describe(`The component is rendered correctly`, () => {
   it(`Fail time component correctly render`, () => {
     const failTime = renderer
     .create(<FailTime
-      onReplayButtonClick = {jest.fn()}
+      onReset = {jest.fn()}
     />)
     .toJSON();
 

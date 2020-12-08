@@ -1,10 +1,24 @@
 import React from 'react';
 import {PureComponent} from 'react';
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/action-creator.js';
+import {GameActionCreator} from '../../reducer/game/game-action-creator.js';
+import {getQuestions} from '../../reducer/data/selectors.js';
+import {getAuthorizationUser} from '../../reducer/user/selectors.js';
+import {
+  getStep,
+  getErrorCount,
+  getGameTime,
+  getMinutes
+} from '../../reducer/game/selectors.js';
 
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import FailTime from '../fail-time/fail-time.jsx';
@@ -24,11 +38,26 @@ class App extends PureComponent {
     } = this.props;
 
     return (
-      this._getScreen(questions[step], gameTime)
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact>
+            {this._getScreen(questions[step], gameTime)}
+          </Route>
+          <Route path='/auth' exact>
+            <AuthorizationScreen/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 
   _getScreen(question, gameTime) {
+    const {isAuthorizationRequired} = this.props;
+
+    if (isAuthorizationRequired) {
+      return <AuthorizationScreen/>;
+    }
+
     if (!question) {
       const {
         errorCount,
@@ -45,9 +74,8 @@ class App extends PureComponent {
 
     if (gameTime <= 0) {
       const {onReset} = this.props;
-
       return <FailTime
-        onReplayButtonClick = {onReset}
+        onReset ={onReset}
       />;
     }
 
@@ -87,34 +115,35 @@ class App extends PureComponent {
 App.propTypes = {
   step: PropTypes.number.isRequired,
   gameTime: PropTypes.number.isRequired,
-  mistakes: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   minutes: PropTypes.number.isRequired,
   onWelcomButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(
       PropTypes.shape(
           ArtistQuestionScreen.question,
           GenreQuestionScreen.question)
-  ).isRequired
+  ).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onReset: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  mistakes: state.mistakes,
-  gameTime: state.gameTime,
-  minutes: state.minutes,
-  errorCount: state.errorCount
+  step: getStep(state),
+  gameTime: getGameTime(state),
+  minutes: getMinutes(state),
+  errorCount: getErrorCount(state),
+  questions: getQuestions(state),
+  isAuthorizationRequired: getAuthorizationUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onWelcomButtonClick: () => dispatch(ActionCreator.incrementStep()),
+  onWelcomButtonClick: () => dispatch(GameActionCreator.incrementStep()),
   onUserAnswer: (userAnswer, question, mistakes, maxMistakes) => {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
+    dispatch(GameActionCreator.incrementStep());
+    dispatch(GameActionCreator.incrementMistake(userAnswer, question, mistakes, maxMistakes));
   },
-  onReset: () => dispatch(ActionCreator.reset())
+  onReset: () => dispatch(GameActionCreator.reset()),
 });
 
 export {App};

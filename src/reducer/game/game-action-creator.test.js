@@ -1,4 +1,10 @@
-import {ActionCreator, isGenreAnswerCorrect, isArtistAnswerCorrect} from './action-creator.js';
+import {ActionType} from './game.js';
+
+import {
+  GameActionCreator,
+  isGenreAnswerCorrect,
+  isArtistAnswerCorrect,
+} from './game-action-creator.js';
 
 describe(`Business logic is correct`, () => {
   it(`Genre answer is checked correctly`, () => {
@@ -62,8 +68,8 @@ describe(`Business logic is correct`, () => {
 
 describe(`Action creator work correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {
-    expect(ActionCreator.incrementStep()).toEqual({
-      type: `INCREMENT_STEP`,
+    expect(GameActionCreator.incrementStep()).toEqual({
+      type: ActionType.INCREMENT_STEP,
       payload: 1
     });
   });
@@ -93,9 +99,9 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 0
     });
   });
@@ -125,9 +131,9 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: 1
     });
   });
@@ -157,23 +163,23 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
+    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
     .toEqual({
-      type: `RESET`
+      type: ActionType.RESET
     });
   });
 
   it(`Action creator decrement time return action with 1000 payload`, () => {
-    expect(ActionCreator.decrementTime(10000)).toEqual({
-      type: `DECREMENT_TIME`,
+    expect(GameActionCreator.decrementTime(10000)).toEqual({
+      type: ActionType.DECREMENT_TIME,
       payload: 1000
     });
   });
 
   it(`Action creator correctly reset state`, () => {
-    expect(ActionCreator.reset())
+    expect(GameActionCreator.reset())
      .toEqual({
-       type: `RESET`
+       type: ActionType.RESET
      });
   });
 });

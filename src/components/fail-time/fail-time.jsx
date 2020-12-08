@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FailTime = (props) => {
-  const {onReplayButtonClick} = props;
+  const {onReset} = props;
 
   return (
     <section className="result">
@@ -12,14 +12,14 @@ const FailTime = (props) => {
       <button
         className="replay"
         type="button"
-        onClick = {onReplayButtonClick}>
+        onClick = {onReset}>
         Попробовать ещё раз</button>
     </section>
   );
 };
 
 FailTime.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired
+  onReset: PropTypes.func.isRequired
 };
 
 export default FailTime;

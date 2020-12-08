@@ -29,8 +29,9 @@ const GenreQuestionScreen = (props) => {
         {answers.map((answer, i) => {
           return (
             <GenreItem
-              key = {`${screenIndex}-answer + ${i}`}
+              key = {`${i} - ${answer.src}`}
               renderPlayer = {renderPlayer}
+              screenIndex = {screenIndex}
               answer = {answer}
               userAnswer = {userAnswers[i]}
               onChange = {onChange}
@@ -53,12 +54,12 @@ GenreQuestionScreen.propTypes = {
   question: PropTypes.shape(
       {
         type: PropTypes.oneOf([`genre`]),
-        genre: PropTypes.oneOf([`rock`, `pop`, `jazz`]),
+        genre: PropTypes.string.isRequired,
         answers: PropTypes.arrayOf(
             PropTypes.shape(
                 {
                   src: PropTypes.string,
-                  genre: PropTypes.oneOf([`rock`, `pop`, `jazz`])
+                  genre: PropTypes.string.isRequired
                 }
             ))
       }

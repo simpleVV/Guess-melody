@@ -23,7 +23,7 @@ const withAudio = (Component) => {
       if (audio) {
         audio.src = src;
 
-        audio.oncanplaythrough = () => this.setState({
+        audio.oncanplay = () => this.setState({
           isLoading: false
         });
 
@@ -46,10 +46,10 @@ const withAudio = (Component) => {
     componentWillUnmount() {
       const audio = this._audioRef.current;
 
-      audio.oncanplaythrough = null;
+      audio.oncanplay = null;
       audio.onplay = null;
       audio.onpause = null;
-      audio.src = ``;
+      audio.src = null;
     }
 
     render() {

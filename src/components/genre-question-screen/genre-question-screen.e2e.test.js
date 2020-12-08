@@ -34,7 +34,7 @@ const mockQuestion = {
 const mockAnswers = [false, false, false, false];
 const answerSubmitHandler = jest.fn();
 const renderPlayer = jest.fn();
-const onChangeHandler = jest.fn();
+const changeHandler = jest.fn();
 
 describe(`The component interactivity`, () => {
   it(`Calls callback when user Click on submit button`, () => {
@@ -44,7 +44,7 @@ describe(`The component interactivity`, () => {
       onAnswer = {answerSubmitHandler}
       renderPlayer = {renderPlayer}
       userAnswers = {mockAnswers}
-      onChange = {onChangeHandler}
+      onChange = {changeHandler}
     />);
 
     const form = genreQuestionScreen.find(`.game__tracks`);

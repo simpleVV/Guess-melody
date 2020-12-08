@@ -1,3 +1,5 @@
+import {ActionType} from './game.js';
+
 const isArtistAnswerCorrect = (userAnswer, question) =>
   userAnswer.artist === question.song.artist;
 
@@ -6,9 +8,9 @@ const isGenreAnswerCorrect = (userAnswer, question) =>
     question.answers[i].genre === question.genre
   ));
 
-const ActionCreator = {
+const GameActionCreator = {
   incrementStep: () => ({
-    type: `INCREMENT_STEP`,
+    type: ActionType.INCREMENT_STEP,
     payload: 1,
   }),
 
@@ -17,9 +19,11 @@ const ActionCreator = {
     const mistakeStep = 1;
 
     switch (question.type) {
+
       case `artist`:
         answerIsCorrect = isArtistAnswerCorrect(userAnswer, question);
         break;
+
       case `genre`:
         answerIsCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
@@ -27,30 +31,30 @@ const ActionCreator = {
 
     if (!answerIsCorrect && mistakes + mistakeStep >= maxMistakes) {
       return {
-        type: `RESET`
+        type: ActionType.RESET
       };
     }
 
     return {
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: answerIsCorrect ? 0 : mistakeStep
     };
   },
 
   decrementTime: (time) => {
     return {
-      type: `DECREMENT_TIME`,
+      type: ActionType.DECREMENT_TIME,
       payload: (time > 0) ? 1000 : 0
     };
   },
 
   reset: () => ({
-    type: `RESET`
-  })
+    type: ActionType.RESET
+  }),
 };
 
 export {
+  GameActionCreator,
   isArtistAnswerCorrect,
-  isGenreAnswerCorrect,
-  ActionCreator,
+  isGenreAnswerCorrect
 };

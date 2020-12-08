@@ -1,5 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {GameActionCreator} from '../../reducer/game/game-action-creator.js';
+import {
+  getGameTime,
+  getMistakes,
+  getErrorCount
+} from '../../reducer/game/selectors.js';
 
 import Mistakes from '../mistakes/mistakes.jsx';
 import Timer from '../timer/timer.jsx';
@@ -7,7 +14,11 @@ import Timer from '../timer/timer.jsx';
 const GameScreen = (props) => {
   const {
     children,
-    type
+    type,
+    gameTime,
+    onTimeUpdate,
+    errorCount,
+    mistakes,
   } = props;
 
   return (
@@ -23,8 +34,15 @@ const GameScreen = (props) => {
             style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
 
-        <Timer/>
-        <Mistakes/>
+        <Timer
+          gameTime = {gameTime}
+          onTimeUpdate = {onTimeUpdate}
+        />
+
+        <Mistakes
+          mistakes = {mistakes}
+          errorCount = {errorCount}
+        />
 
       </header>
 
@@ -39,6 +57,22 @@ GameScreen.propTypes = {
     PropTypes.node
   ]).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
+  gameTime: PropTypes.number.isRequired,
+  onTimeUpdate: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired
 };
 
-export default GameScreen;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  gameTime: getGameTime(state),
+  mistakes: getMistakes(state),
+  errorCount: getErrorCount(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTimeUpdate: (gameTime) => dispatch(GameActionCreator.decrementTime(gameTime))
+});
+
+export {GameScreen};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
