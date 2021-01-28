@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly GenreItem correctly renders with transferred mock data 1`] = `
+exports[`The component is rendered correctly. GenreItem correctly renders with transferred mock data. 1`] = `
 <div
   className="track"
 >

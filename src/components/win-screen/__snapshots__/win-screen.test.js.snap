@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The component is rendered correctly. Win screen is renders correctly. 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="result__total"
+  >
+    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+    type="button"
+  >
+    Сыграть ещё раз
+  </a>
+</section>
+`;

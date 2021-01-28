@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly Fail time component correctly render 1`] = `
+exports[`The component is rendered correctly. Fail time component correctly render. 1`] = `
 <section
   className="result"
 >
@@ -17,19 +17,20 @@ exports[`The component is rendered correctly Fail time component correctly rende
   <h2
     className="result__title"
   >
-    Увы и ах!
+    Какая жалость!
   </h2>
   <p
     className="result__total result__total--fail"
   >
-    Время вышло! Вы не успели отгадать все мелодии
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <button
+  <a
     className="replay"
-    onClick={[MockFunction]}
+    href="/"
+    onClick={[Function]}
     type="button"
   >
     Попробовать ещё раз
-  </button>
+  </a>
 </section>
 `;

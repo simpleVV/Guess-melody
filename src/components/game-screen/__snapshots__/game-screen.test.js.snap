@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly With type artist 1`] = `
+exports[`The component is rendered correctly. With type artist. 1`] = `
 <section
   className="game game--artist"
 >
@@ -48,7 +48,7 @@ exports[`The component is rendered correctly With type artist 1`] = `
       <span
         className="timer__mins"
       >
-        00
+        05
       </span>
       <span
         className="timer__dots"
@@ -58,7 +58,7 @@ exports[`The component is rendered correctly With type artist 1`] = `
       <span
         className="timer__secs"
       >
-        03
+        00
       </span>
     </div>
     <div
@@ -73,9 +73,6 @@ exports[`The component is rendered correctly With type artist 1`] = `
       <div
         className="correct"
       />
-      <div
-        className="wrong"
-      />
     </div>
   </header>
   <div
@@ -84,7 +81,7 @@ exports[`The component is rendered correctly With type artist 1`] = `
 </section>
 `;
 
-exports[`The component is rendered correctly With type genre 1`] = `
+exports[`The component is rendered correctly. With type genre. 1`] = `
 <section
   className="game game--genre"
 >
@@ -132,7 +129,7 @@ exports[`The component is rendered correctly With type genre 1`] = `
       <span
         className="timer__mins"
       >
-        00
+        05
       </span>
       <span
         className="timer__dots"
@@ -142,7 +139,7 @@ exports[`The component is rendered correctly With type genre 1`] = `
       <span
         className="timer__secs"
       >
-        03
+        00
       </span>
     </div>
     <div
@@ -156,9 +153,6 @@ exports[`The component is rendered correctly With type genre 1`] = `
       />
       <div
         className="correct"
-      />
-      <div
-        className="wrong"
       />
     </div>
   </header>

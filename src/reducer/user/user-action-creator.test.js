@@ -2,34 +2,44 @@ import {ActionType} from './user.js';
 import createAPI from '../../api.js';
 import MockAdapter from 'axios-mock-adapter';
 import {
-  UserActionCreator,
+  ActionCreator,
   Operation
 } from './user-action-creator.js';
 
 const api = createAPI(() => {});
 
+const mockUserData = {
+  email: `bob@mail.ru`,
+  password: `123`
+};
+
 describe(`Action creator work correctly`, () => {
   it(`Action creator correctly change authorization status`, () => {
-    expect(UserActionCreator.requireAuthorization(false))
+    expect(ActionCreator.requireAuthorization(false))
       .toEqual({
         type: ActionType.REQUIRE_AUTHORIZATION,
         payload: false
       });
 
-    expect(UserActionCreator.requireAuthorization(true))
+    expect(ActionCreator.requireAuthorization(true))
       .toEqual({
         type: ActionType.REQUIRE_AUTHORIZATION,
         payload: true
       });
   });
 
+  it(`Action creator correctly save user data`, () => {
+    expect(ActionCreator.authorizeUser(mockUserData))
+    .toEqual({
+      type: ActionType.AUTHORIZE_USER,
+      payload: mockUserData
+    });
+  });
+
   it(`Should successfully authorize the user then API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const mockUserData = {
-      email: `bob@mail.ru`,
-      password: `123`
-    };
+
     const login = Operation.login(mockUserData);
 
     apiMock
@@ -38,7 +48,7 @@ describe(`Action creator work correctly`, () => {
 
     return login(dispatch, () => {}, api)
         .then(() => {
-          expect(dispatch).toHaveBeenCalledTimes(1);
+          expect(dispatch).toHaveBeenCalledTimes(2);
           expect(dispatch).toHaveBeenNthCalledWith(1, {
             type: ActionType.REQUIRE_AUTHORIZATION,
             payload: false

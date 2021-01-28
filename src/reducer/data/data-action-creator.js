@@ -1,6 +1,6 @@
 import {ActionType} from './data.js';
 
-const DataActionCreator = {
+const ActionCreator = {
   loadQuestions: (questions) => {
     return {
       type: ActionType.LOAD_QUESTIONS,
@@ -13,12 +13,12 @@ const Operation = {
   loadQuestions: () => (dispatch, getState, api) => {
     return api.get(`/questions`)
     .then((response) => {
-      dispatch(DataActionCreator.loadQuestions(response.data));
+      dispatch(ActionCreator.loadQuestions(response.data));
     });
   }
 };
 
 export {
-  DataActionCreator,
+  ActionCreator,
   Operation
 };

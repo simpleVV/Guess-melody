@@ -1,12 +1,12 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 import GenreQuestionScreen from './genre-question-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
 const mockQuestion = {
-  type: `genre`,
   genre: `rock`,
   answers: [
     {
@@ -32,23 +32,34 @@ const mockQuestion = {
   ]
 };
 const mockAnswers = [false, false, false, false];
-const answerSubmitHandler = jest.fn();
 const renderPlayer = jest.fn();
 const changeHandler = jest.fn();
+let answerSubmitHandler;
+let genreQuestionScreen;
+let form;
 
-describe(`The component interactivity`, () => {
-  it(`Calls callback when user Click on submit button`, () => {
-    const genreQuestionScreen = shallow(<GenreQuestionScreen
-      screenIndex = {0}
-      question = {mockQuestion}
-      onAnswer = {answerSubmitHandler}
-      renderPlayer = {renderPlayer}
-      userAnswers = {mockAnswers}
-      onChange = {changeHandler}
-    />);
+beforeEach(() => {
+  answerSubmitHandler = jest.fn();
+  genreQuestionScreen = shallow(
+      <GenreQuestionScreen
+        screenIndex = {0}
+        question = {mockQuestion}
+        onAnswer = {answerSubmitHandler}
+        renderPlayer = {renderPlayer}
+        userAnswers = {mockAnswers}
+        onChange = {changeHandler} />
+  );
+  form = genreQuestionScreen.find(`.game__tracks`);
+});
 
-    const form = genreQuestionScreen.find(`.game__tracks`);
+describe(`Before submiting form.`, () => {
+  it(`Callback should not be called.`, () => {
+    expect(answerSubmitHandler).toHaveBeenCalledTimes(0);
+  });
+});
 
+describe(`After submiting form.`, () => {
+  it(`Callback should be called.`, () => {
     form.simulate(`submit`, {
       preventDefault: () => {}
     });

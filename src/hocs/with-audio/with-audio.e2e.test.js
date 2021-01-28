@@ -15,7 +15,7 @@ const MockPlayer = (props) => {
 
   return (
     <div>
-      <button onClick = {onPlayButtonClick}/>
+      <button onClick = {onPlayButtonClick} />
       {children}
     </div>
   );
@@ -29,15 +29,16 @@ MockPlayer.propTypes = {
   ])
 };
 
-describe(`The component interactivity`, () => {
-  it(`Turn on audio`, () => {
+describe(`The component interactivity.`, () => {
+  it(`Turn on audio.`, () => {
     const MockPlayerWrapped = withAudio(MockPlayer);
     const playButtonClickHandler = jest.fn();
-    const mockPlayerWrapped = mount(<MockPlayerWrapped
-      isPlaying = {true}
-      src = {``}
-      onPlayButtonClick = {playButtonClickHandler}
-    />);
+    const mockPlayerWrapped = mount(
+        <MockPlayerWrapped
+          isPlaying = {true}
+          src = {``}
+          onPlayButtonClick = {playButtonClickHandler} />
+    );
 
     window.HTMLMediaElement.prototype.play = () => {};
 
@@ -54,14 +55,15 @@ describe(`The component interactivity`, () => {
     expect(_audioRef.current.play).toHaveBeenCalledTimes(1);
   });
 
-  it(`Turn off audio`, () => {
+  it(`Turn off audio.`, () => {
     const MockPlayerWrapped = withAudio(MockPlayer);
     const playButtonClickHandler = jest.fn();
-    const mockPlayerWrapped = mount(<MockPlayerWrapped
-      isPlaying = {false}
-      src = {``}
-      onPlayButtonClick = {playButtonClickHandler}
-    />);
+    const mockPlayerWrapped = mount(
+        <MockPlayerWrapped
+          isPlaying = {false}
+          src = {``}
+          onPlayButtonClick = {playButtonClickHandler} />
+    );
 
     window.HTMLMediaElement.prototype.pause = () => {};
 

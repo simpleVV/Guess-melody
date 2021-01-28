@@ -63,11 +63,9 @@ const withAudio = (Component) => {
           {...this.props}
           isLoading = {isLoading}
           isPlaying = {isPlaying}
-          onPlayButtonClick = {this._playButtonClickHandler}
-        >
+          onPlayButtonClick = {this._playButtonClickHandler}>
           <audio
-            ref={this._audioRef}
-          />
+            ref={this._audioRef} />
         </Component>
       );
     }

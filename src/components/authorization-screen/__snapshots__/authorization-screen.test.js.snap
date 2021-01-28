@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly AuthorizationScreen correctly renders with 1`] = `
+exports[`The component is rendered correctly. Authorization screen is renders correctly. 1`] = `
 <section
   className="login"
 >

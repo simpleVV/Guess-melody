@@ -2,7 +2,7 @@ import createAPI from '../../api.js';
 import MockAdapter from 'axios-mock-adapter';
 import {ActionType} from './data.js';
 import {
-  DataActionCreator,
+  ActionCreator,
   Operation
 } from './data-action-creator.js';
 
@@ -36,7 +36,7 @@ describe(`Action creator work correctly`, () => {
       },
     ];
 
-    expect(DataActionCreator.loadQuestions(mockQuestions))
+    expect(ActionCreator.loadQuestions(mockQuestions))
       .toEqual({
         type: ActionType.LOAD_QUESTIONS,
         payload: mockQuestions

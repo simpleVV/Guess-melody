@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HOC with private route is rendered correctly. Component correctly renders if user sign in. 1`] = `
+<div>
+  Hello User!
+</div>
+`;
+
+exports[`HOC with private route is rendered correctly. Component should not rendered if user sign out. 1`] = `null`;

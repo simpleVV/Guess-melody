@@ -21,18 +21,20 @@ MockComponent.propTypes = {
   ])
 };
 
-describe(`The component with audio is rendered correctly`, () => {
-  it(`With Audio correctly renders`, () => {
-    const MockComponentWrapped = withAudio(MockComponent);
+const MockComponentWrapped = withAudio(MockComponent);
+
+describe(`HOC with audio is rendered correctly.`, () => {
+  it(`Component correctly renders with HOC.`, () => {
 
     const mockComponentWrapped = renderer
-    .create(<MockComponentWrapped
-      isLoading = {false}
-      isPlaying = {false}
-      src = {``}
-      onPlayButtonClick = {jest.fn()}
-    />)
-      .toJSON();
+    .create(
+        <MockComponentWrapped
+          isLoading = {false}
+          isPlaying = {false}
+          src = {``}
+          onPlayButtonClick = {jest.fn()} />
+    )
+    .toJSON();
 
     expect(mockComponentWrapped).toMatchSnapshot();
   });

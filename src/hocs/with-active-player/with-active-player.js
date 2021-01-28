@@ -30,11 +30,10 @@ const withActivePlayer = (Component) => {
                 key = {i}
                 src={audio.src}
                 isPlaying={i === activePlayer}
-                onPlayButtonClick={() => this._playButtonClickHandler(i)}
-              />
+                onPlayButtonClick={() => this._playButtonClickHandler(i)} />
             );
-          }}
-        />);
+          }} />
+      );
     }
 
     _playButtonClickHandler(currentPlayer) {
