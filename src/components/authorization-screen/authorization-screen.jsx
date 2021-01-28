@@ -2,7 +2,8 @@ import React from 'react';
 import {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {GameActionCreator} from '../../reducer/game/game-action-creator.js';
+
+import {ActionCreator as GameActionCreator} from '../../reducer/game/game-action-creator.js';
 import {Operation} from '../../reducer/user/user-action-creator.js';
 
 class AuthorizationScreen extends PureComponent {
@@ -29,8 +30,7 @@ class AuthorizationScreen extends PureComponent {
           onSubmit = {(evt) => {
             evt.preventDefault();
             this._submitHandler();
-          }}
-        >
+          }}>
           <p className="login__field">
             <label className="login__label" htmlFor="name">Логин</label>
             <input
@@ -39,8 +39,7 @@ class AuthorizationScreen extends PureComponent {
               name="name"
               id="name"
               ref = {this._loginRef}
-              required
-            />
+              required />
           </p>
           <p className="login__field">
             <label className="login__label" htmlFor="password">Пароль</label>
@@ -50,8 +49,7 @@ class AuthorizationScreen extends PureComponent {
               name="password"
               id="password"
               ref = {this._passwordRef}
-              required
-            />
+              required />
             <span className="login__error">Неверный пароль</span>
           </p>
           <button
@@ -64,8 +62,7 @@ class AuthorizationScreen extends PureComponent {
         <button
           className="replay"
           type="button"
-          onClick = {onReset}
-        >
+          onClick = {onReset}>
             Сыграть ещё раз
         </button>
       </section>
@@ -73,9 +70,7 @@ class AuthorizationScreen extends PureComponent {
   }
 
   _submitHandler() {
-    const {
-      login
-    } = this.props;
+    const {login} = this.props;
 
     const userData = {
       email: this._loginRef.current.value,

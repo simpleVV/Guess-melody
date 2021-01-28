@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import ArtistQuestionScreen from './artist-question-screen.jsx';
 
 const question = {
@@ -25,15 +26,16 @@ const question = {
   ]
 };
 
-describe(`The component is rendered correctly`, () => {
-  it(`ArtistQuestionScreen correctly render with transferred mock-question`, () => {
+describe(`The component is rendered correctly.`, () => {
+  it(`ArtistQuestionScreen is renders correctly.`, () => {
     const artistQuestionScreen = renderer
-    .create(<ArtistQuestionScreen
-      question = {question}
-      onAnswer = {jest.fn()}
-      renderPlayer = {jest.fn()}
-      screenIndex = {1}
-    />)
+    .create(
+        <ArtistQuestionScreen
+          question = {question}
+          onAnswer = {jest.fn()}
+          renderPlayer = {jest.fn()}
+          screenIndex = {1} />
+    )
     .toJSON();
 
     expect(artistQuestionScreen).toMatchSnapshot();

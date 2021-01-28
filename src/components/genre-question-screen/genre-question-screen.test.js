@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import GenreQuestionScreen from './genre-question-screen.jsx';
 
 const question = {
-  type: `genre`,
   genre: `rock`,
   answers: [
     {
@@ -26,17 +26,18 @@ const question = {
 };
 const mockAnswers = new Array(question.answers.length).fill(false);
 
-describe(`The component is rendered correctly`, () => {
-  it(`GenreQuestionScreen correctly renders with transferred mock-question`, () => {
+describe(`The component is rendered correctly.`, () => {
+  it(`GenreQuestionScreen correctly renders with transferred mock-question.`, () => {
     const genreQuestionScreen = renderer
-    .create(<GenreQuestionScreen
-      question = {question}
-      onAnswer = {jest.fn()}
-      renderPlayer = {jest.fn()}
-      onChange = {jest.fn()}
-      userAnswers = {mockAnswers}
-      screenIndex = {0}
-    />)
+    .create(
+        <GenreQuestionScreen
+          question = {question}
+          onAnswer = {jest.fn()}
+          renderPlayer = {jest.fn()}
+          onChange = {jest.fn()}
+          userAnswers = {mockAnswers}
+          screenIndex = {0} />
+    )
     .toJSON();
 
     expect(genreQuestionScreen).toMatchSnapshot();

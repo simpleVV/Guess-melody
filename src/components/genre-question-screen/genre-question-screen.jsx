@@ -35,8 +35,7 @@ const GenreQuestionScreen = (props) => {
               answer = {answer}
               userAnswer = {userAnswers[i]}
               onChange = {onChange}
-              id = {i}
-            />
+              id = {i} />
           );
         })}
         <button className="game__submit button" type="submit">Ответить</button>
@@ -53,7 +52,6 @@ GenreQuestionScreen.propTypes = {
   renderPlayer: GenreItem.propTypes.renderPlayer,
   question: PropTypes.shape(
       {
-        type: PropTypes.oneOf([`genre`]),
         genre: PropTypes.string.isRequired,
         answers: PropTypes.arrayOf(
             PropTypes.shape(

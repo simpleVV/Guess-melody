@@ -34,16 +34,24 @@ const mockQuestion = {
 const MockComponent = () => <div />;
 const MockComponentWrapped = withUserAnswer(MockComponent);
 const answerHandler = jest.fn();
+let mockComponentWrapped;
 
-describe(`The component interactivity`, () => {
-  it(`Should change answers`, () => {
-    const mockComponentWrapped = shallow(<MockComponentWrapped
-      question = {mockQuestion}
-      onAnswer = {answerHandler}
-    />);
+beforeEach(() => {
+  mockComponentWrapped = shallow(
+      <MockComponentWrapped
+        question = {mockQuestion}
+        onAnswer = {answerHandler} />
+  );
+});
 
+describe(`Before answers changing`, () => {
+  it(`Should not change answers`, () => {
     expect(mockComponentWrapped.props().userAnswers).toEqual([false, false, false, false]);
+  });
+});
 
+describe(`After answers changing.`, () => {
+  it(`Should change answers.`, () => {
     mockComponentWrapped.props().onChange(0, true);
     expect(mockComponentWrapped.props().userAnswers).toEqual([true, false, false, false]);
 

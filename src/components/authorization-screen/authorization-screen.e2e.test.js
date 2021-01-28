@@ -6,36 +6,58 @@ import {AuthorizationScreen} from './authorization-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const resetHandler = jest.fn();
-const loginHandler = jest.fn();
+let resetHandler;
+let loginHandler;
+let authorizationScreen;
+let loginForm;
+let replayButton;
 
-describe(`The component interactivity`, () => {
-  it(`Calls callback when user click on replay button`, () => {
-    const authorizationScreen = mount(<AuthorizationScreen
-      onReset = {resetHandler}
-      login = {loginHandler}
-    />);
+beforeEach(() => {
+  loginHandler = jest.fn();
+  resetHandler = jest.fn();
+  authorizationScreen = mount(
+      <AuthorizationScreen
+        onReset = {resetHandler}
+        login = {loginHandler} />
+  );
+  loginForm = authorizationScreen.find(`.login__form`);
+  replayButton = authorizationScreen.find(`.replay`);
+});
 
-    const replayButton = authorizationScreen.find(`.replay`);
+describe(`Before clicking on replay button.`, () => {
+  it(`Callback should not be called.`, () => {
+    expect(resetHandler).toHaveBeenCalledTimes(0);
+  });
+});
 
+describe(`After clicking on replay button.`, () => {
+  it(`Callback should be called once.`, () => {
     replayButton.simulate(`click`);
 
     expect(resetHandler).toHaveBeenCalledTimes(1);
   });
+});
 
-  it(`Calls callback when user submit form`, () => {
-    const authorizationScreen = mount(<AuthorizationScreen
-      onReset = {resetHandler}
-      login = {loginHandler}
-    />);
+describe(`Before submitting login form.`, () => {
+  it(`Callback should not be called.`, () => {
+    expect(loginHandler).toHaveBeenCalledTimes(0);
+  });
+});
 
-    const loginForm = authorizationScreen.find(`.login__form`);
-
+describe(`After submitting login form.`, () => {
+  it(`Callback should be called once.`, () => {
     loginForm.simulate(`submit`, (evt) => {
       evt.preventDefault();
     });
 
     expect(loginHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Callback should be called with empty parameters.`, () => {
+    loginForm.simulate(`submit`, (evt) => {
+      evt.preventDefault();
+    });
+
     expect(loginHandler.mock.calls[0][0]).toEqual({
       email: ``,
       password: ``

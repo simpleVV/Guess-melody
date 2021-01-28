@@ -2,25 +2,45 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import Timer from './timer.jsx';
+import {Timer} from './timer.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const mockTimeInMilSec = 300000;
-const timeUpdateHandler = jest.fn();
+let timeUpdateHandler;
+let timerStopHandler;
 
-describe(`The component interactivity`, () => {
-  it(`Update time every second`, () => {
+jest.useFakeTimers();
 
-    jest.useFakeTimers();
+beforeEach(() => {
+  timeUpdateHandler = jest.fn();
+  timerStopHandler = jest.fn();
+});
 
-    const timer = mount(<Timer
-      gameTime = {mockTimeInMilSec}
-      onTimeUpdate = {timeUpdateHandler}
-    />);
+describe(`Before starting timer.`, () => {
+  it(`Timer should not be updated and callback should not be called.`, () => {
+    const timer = mount(
+        <Timer
+          gameTime = {1000}
+          onTimeUpdate = {timeUpdateHandler}
+          onTimerStop = {timerStopHandler} />
+    );
 
-    expect(timer.prop(`gameTime`)).toEqual(300000);
+    expect(timer.prop(`gameTime`)).toEqual(1000);
     expect(timeUpdateHandler).toHaveBeenCalledTimes(0);
+  });
+});
+
+
+describe(`After timer starting.`, () => {
+  it(`Timer should be updated and callback should be called.`, () => {
+    const timer = mount(
+        <Timer
+          gameTime = {1000}
+          onTimeUpdate = {timeUpdateHandler}
+          onTimerStop = {timerStopHandler} />
+    );
+
+    expect(timer.prop(`gameTime`)).toEqual(1000);
 
     jest.advanceTimersByTime(1000);
 
@@ -30,5 +50,21 @@ describe(`The component interactivity`, () => {
     jest.advanceTimersByTime(1000);
 
     expect(timeUpdateHandler).toHaveBeenCalledTimes(2);
+  });
+
+  describe(`After timer stop`, () => {
+    it(`Callback onTimerStop should be called`, () => {
+      const timer = mount(
+          <Timer
+            gameTime = {0}
+            onTimeUpdate = {timeUpdateHandler}
+            onTimerStop = {timerStopHandler} />
+      );
+
+      expect(timer.prop(`gameTime`)).toEqual(0);
+      jest.advanceTimersByTime(1000);
+
+      expect(timerStopHandler).toHaveBeenCalledTimes(1);
+    });
   });
 });

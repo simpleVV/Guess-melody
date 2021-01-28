@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The element is rendered correctly Mistakes element correctly renders if a few answers is incorrect 1`] = `
+exports[`The component is rendered correctly. Mistakes component correctly renders if a few answers is incorrect. 1`] = `
 <div
   className="game__mistakes"
 >
@@ -16,7 +16,7 @@ exports[`The element is rendered correctly Mistakes element correctly renders if
 </div>
 `;
 
-exports[`The element is rendered correctly Mistakes element correctly renders if all answers correct 1`] = `
+exports[`The component is rendered correctly. Mistakes component correctly renders if all answers correct. 1`] = `
 <div
   className="game__mistakes"
 >

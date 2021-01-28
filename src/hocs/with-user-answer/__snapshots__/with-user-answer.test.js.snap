@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HOC with user answer is rendered correctly. Component correctly renders with HOC. 1`] = `<div />`;

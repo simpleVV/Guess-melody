@@ -5,12 +5,12 @@ import withActivePlayer from './with-active-player.js';
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe(`The component interactivity`, () => {
-  it(`Paused by defautl`, () => {
+describe(`The component interactivity.`, () => {
+  it(`Paused by defautl.`, () => {
     const MockComponent = () => <div />;
     const MockComponentWrapped = withActivePlayer(MockComponent);
 
-    const mockComponentWrapped = shallow(<MockComponentWrapped/>);
+    const mockComponentWrapped = shallow(<MockComponentWrapped />);
 
     expect(mockComponentWrapped.state().activePlayer).toEqual(-1);
   });

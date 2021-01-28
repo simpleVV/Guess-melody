@@ -30,14 +30,14 @@ const ArtistQuestionScreen = (props) => {
               name="answer"
               value = {`answer-${i}`}
               id = {`answer-${i}`}
-              onClick = {() => onAnswer(answer, question)}/>
+              onClick = {() => onAnswer(answer, question)} />
             <label
               className="artist__name"
               htmlFor = {`answer-${i}`}>
               <img
                 className="artist__picture"
                 src = {answer.picture}
-                alt = {answer.artist}/>
+                alt = {answer.artist} />
               {answer.artist}
             </label>
           </div>;

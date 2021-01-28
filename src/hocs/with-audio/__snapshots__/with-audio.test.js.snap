@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component with audio is rendered correctly With Audio correctly renders 1`] = `
+exports[`HOC with audio is rendered correctly. Component correctly renders with HOC. 1`] = `
 <div>
   <audio />
 </div>

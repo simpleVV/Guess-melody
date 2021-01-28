@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly ArtistQuestionScreen correctly render with transferred mock-question 1`] = `
+exports[`The component is rendered correctly. ArtistQuestionScreen is renders correctly. 1`] = `
 <section
   className="game__screen"
 >

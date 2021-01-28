@@ -8,7 +8,7 @@ const isGenreAnswerCorrect = (userAnswer, question) =>
     question.answers[i].genre === question.genre
   ));
 
-const GameActionCreator = {
+const ActionCreator = {
   incrementStep: () => ({
     type: ActionType.INCREMENT_STEP,
     payload: 1,
@@ -48,13 +48,20 @@ const GameActionCreator = {
     };
   },
 
+  stopTimer: () => {
+    return {
+      type: ActionType.STOP_TIMER,
+      payload: true
+    };
+  },
+
   reset: () => ({
     type: ActionType.RESET
   }),
 };
 
 export {
-  GameActionCreator,
+  ActionCreator,
   isArtistAnswerCorrect,
   isGenreAnswerCorrect
 };

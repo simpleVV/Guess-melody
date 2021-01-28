@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 import ArtistQuestionScreen from './artist-question-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -27,28 +28,40 @@ const mockQuestion = {
     },
   ]
 };
-const radioInputCheckHandler = jest.fn();
 const renderPlayer = jest.fn();
 
-describe(`The component interactivity`, () => {
-  it(`Return correct data when user answer on question`, () => {
-    const artistQuestionScreen = shallow(<ArtistQuestionScreen
-      screenIndex = {0}
-      question = {mockQuestion}
-      onAnswer = {radioInputCheckHandler}
-      renderPlayer = {renderPlayer}
-    />);
+let radioInputCheckHandler;
+let artistQuestionScreen;
+let inputs;
 
-    const firstRadioInput = artistQuestionScreen.find(`.artist__input`).first();
+beforeEach(() => {
+  radioInputCheckHandler = jest.fn();
+  artistQuestionScreen = shallow(
+      <ArtistQuestionScreen
+        screenIndex = {0}
+        question = {mockQuestion}
+        onAnswer = {radioInputCheckHandler}
+        renderPlayer = {renderPlayer}
+      />
+  );
+  inputs = artistQuestionScreen.find(`.artist__input`);
+});
 
-    firstRadioInput.simulate(`click`);
+describe(`Before changing input.`, () => {
+  it(`Callback should not be called.`, () => {
+    expect(radioInputCheckHandler).toHaveBeenCalledTimes(0);
+  });
+});
+
+describe(`After changing input.`, () => {
+  it(`Should selected the appropriate answer.`, () => {
+
+    inputs.at(0).simulate(`click`);
 
     expect(radioInputCheckHandler).toHaveBeenCalledTimes(1);
     expect(radioInputCheckHandler.mock.calls[0][0]).toEqual(mockQuestion.answers[0]);
 
-    const secondRadioInput = artistQuestionScreen.find(`.artist__input`).at(1);
-
-    secondRadioInput.simulate(`click`);
+    inputs.at(1).simulate(`click`);
 
     expect(radioInputCheckHandler).toHaveBeenCalledTimes(2);
     expect(radioInputCheckHandler.mock.calls[1][0]).toEqual(mockQuestion.answers[1]);

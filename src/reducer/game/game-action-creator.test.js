@@ -1,7 +1,7 @@
 import {ActionType} from './game.js';
 
 import {
-  GameActionCreator,
+  ActionCreator,
   isGenreAnswerCorrect,
   isArtistAnswerCorrect,
 } from './game-action-creator.js';
@@ -68,7 +68,7 @@ describe(`Business logic is correct`, () => {
 
 describe(`Action creator work correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {
-    expect(GameActionCreator.incrementStep()).toEqual({
+    expect(ActionCreator.incrementStep()).toEqual({
       type: ActionType.INCREMENT_STEP,
       payload: 1
     });
@@ -99,7 +99,7 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 0
@@ -131,7 +131,7 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
+    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 0, 3))
     .toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 1
@@ -163,23 +163,30 @@ describe(`Action creator work correctly`, () => {
       ]
     };
 
-    expect(GameActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
+    expect(ActionCreator.incrementMistake(mockUserAnswers, mockQuestion, 2, 2))
     .toEqual({
       type: ActionType.RESET
     });
   });
 
   it(`Action creator decrement time return action with 1000 payload`, () => {
-    expect(GameActionCreator.decrementTime(10000)).toEqual({
+    expect(ActionCreator.decrementTime(10000)).toEqual({
       type: ActionType.DECREMENT_TIME,
       payload: 1000
     });
   });
 
   it(`Action creator correctly reset state`, () => {
-    expect(GameActionCreator.reset())
+    expect(ActionCreator.reset())
      .toEqual({
        type: ActionType.RESET
      });
+  });
+
+  it(`Action creator stop timer return action with true payload`, () => {
+    expect(ActionCreator.stopTimer(true)).toEqual({
+      type: ActionType.STOP_TIMER,
+      payload: true
+    });
   });
 });

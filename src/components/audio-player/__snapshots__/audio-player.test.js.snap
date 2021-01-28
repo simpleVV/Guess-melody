@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly Audio player correctly render with transferred mock track 1`] = `
+exports[`The component is rendered correctly. Audio player correctly render with transferred mock track. 1`] = `
 Array [
   <button
     className="track__button track__button--pause"

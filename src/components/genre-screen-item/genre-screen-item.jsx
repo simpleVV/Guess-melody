@@ -25,8 +25,7 @@ const GenreItem = (props) => {
           value = {`answer-${id}`}
           id = {`answer-${id}`}
           onChange = {
-            () => onChange(id)
-          }/>
+            () => onChange(id)} />
         <label
           className="game__check"
           htmlFor = {`answer-${id}`}>

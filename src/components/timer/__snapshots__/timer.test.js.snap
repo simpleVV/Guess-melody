@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The component is rendered correctly Timer component is rendered correctly with transferred mock time 1`] = `
+exports[`The component is rendered correctly. Timer component is rendered correctly with transferred mock time. 1`] = `
 <div
   className="timer__value"
   xmlns="http://www.w3.org/1999/xhtml"

@@ -8,18 +8,18 @@ const mockAnswer = {
   genre: `rock`
 };
 
-describe(`The component is rendered correctly`, () => {
-  it(`GenreItem correctly renders with transferred mock data`, () => {
+describe(`The component is rendered correctly.`, () => {
+  it(`GenreItem correctly renders with transferred mock data.`, () => {
     const genreItem = renderer
-    .create(<GenreItem
-      answer = {mockAnswer}
-      id = {0}
-      renderPlayer = {jest.fn()}
-      screenIndex = {10}
-      userAnswer = {false}
-      onAnswerChange = {jest.fn()}
-      onChange = {jest.fn()}
-    />)
+    .create(
+        <GenreItem
+          answer = {mockAnswer}
+          id = {0}
+          renderPlayer = {jest.fn()}
+          screenIndex = {10}
+          userAnswer = {false}
+          onChange = {jest.fn()} />
+    )
     .toJSON();
 
     expect(genreItem).toMatchSnapshot();
