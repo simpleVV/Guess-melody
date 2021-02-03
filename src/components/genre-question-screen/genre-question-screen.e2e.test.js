@@ -1,8 +1,8 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import GenreQuestionScreen from './genre-question-screen.jsx';
+import {GenreQuestionScreen} from './genre-question-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -40,7 +40,7 @@ let form;
 
 beforeEach(() => {
   answerSubmitHandler = jest.fn();
-  genreQuestionScreen = shallow(
+  genreQuestionScreen = mount(
       <GenreQuestionScreen
         screenIndex = {0}
         question = {mockQuestion}
@@ -60,8 +60,8 @@ describe(`Before submiting form.`, () => {
 
 describe(`After submiting form.`, () => {
   it(`Callback should be called.`, () => {
-    form.simulate(`submit`, {
-      preventDefault: () => {}
+    form.simulate(`submit`, (evt) => {
+      evt.preventDefault();
     });
 
     expect(answerSubmitHandler).toHaveBeenCalledTimes(1);

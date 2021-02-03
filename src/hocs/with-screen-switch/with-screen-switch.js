@@ -19,7 +19,6 @@ import GameOverScreen from '../../components/game-over-screen/game-over-screen.j
 import WinScreen from '../../components/win-screen/win-screen.jsx';
 import {FailMessage} from '../../utils/const.js';
 import withActivePlayer from '../with-active-player/with-active-player.js';
-import withUserAnswer from '../with-user-answer/with-user-answer.js';
 import withPrivateRoute from '../with-private-route/with-private-route.js';
 import {ActionCreator as GameActionCreator} from '../../reducer/game/game-action-creator.js';
 import {
@@ -29,8 +28,10 @@ import {
   getMinutes,
   getMistakes
 } from '../../reducer/game/selectors.js';
+import {getQuestions} from '../../reducer/data/selectors.js';
 
-const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
+
+const GenreQuestionScreenWrapped = withActivePlayer(GenreQuestionScreen);
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const WinScreenWrapped = withPrivateRoute(WinScreen);
 
@@ -44,9 +45,7 @@ const withScreenSwitch = (Component) => {
     }
 
     render() {
-      const {
-        onReset,
-      } = this.props;
+      const {onReset} = this.props;
 
       return (
         <Router>
@@ -63,21 +62,21 @@ const withScreenSwitch = (Component) => {
               path = "/win"
               exact
               render = {() =>
-                <WinScreenWrapped
-                  onReplayButtonClick = {onReset} />
+                <WinScreenWrapped />
               } />
             <Route
               path="/lose"
               exact
               render = {() =>
                 <GameOverScreen
+                  onReplayButtonClick = {onReset}
                   message = {FailMessage.ATTEMPTS_ENDED} />
               } />
+            <Route
+              path = "/sign-in"
+              exact
+              render = {() => <SignIn/>} />
           </Switch>
-          <Route
-            path = "/sign-in"
-            exact
-            render = {() => <SignIn/>} />
         </Router>
       );
     }
@@ -91,7 +90,8 @@ const withScreenSwitch = (Component) => {
         mistakes,
         isTimerStop,
         onUserAnswer,
-        onReset
+        onReset,
+        questions
       } = this.props;
 
       if (!question) {
@@ -111,7 +111,7 @@ const withScreenSwitch = (Component) => {
         return <Redirect to = "/lose" />;
       }
 
-      if (step >= 2) {
+      if (step >= questions.lenght) {
         return <Redirect to = "/win" />;
       }
 
@@ -119,7 +119,8 @@ const withScreenSwitch = (Component) => {
         case `genre`:
           return (
             <GameScreen
-              type = {question.type}>
+              type = {question.type}
+              onBackButtonClick = {onReset}>
               <GenreQuestionScreenWrapped
                 screenIndex = {step}
                 question = {question}
@@ -129,7 +130,8 @@ const withScreenSwitch = (Component) => {
         case `artist`:
           return (
             <GameScreen
-              type = {question.type}>
+              type = {question.type}
+              onBackButtonClick = {onReset}>
               <ArtistQuestionScreenWrapped
                 screenIndex = {step}
                 question = {question}
@@ -150,6 +152,9 @@ const withScreenSwitch = (Component) => {
     mistakes: PropTypes.number.isRequired,
     isTimerStop: PropTypes.bool.isRequired,
     onUserAnswer: PropTypes.func.isRequired,
+    questions: {
+      length: PropTypes.number.isRequired
+    }
   };
 
   return WithScreenSwitch;
@@ -160,6 +165,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   isTimerStop: getIsTimerStop(state),
   minutes: getMinutes(state),
   errorCount: getErrorCount(state),
+  questions: getQuestions(state),
   mistakes: getMistakes(state),
 });
 

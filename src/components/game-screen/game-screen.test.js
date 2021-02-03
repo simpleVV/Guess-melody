@@ -23,7 +23,8 @@ describe(`The component is rendered correctly.`, () => {
     .create(
         <Provider store = {store}>
           <GameScreen
-            type = {`genre`}>
+            type = {`genre`}
+            onBackButtonClick = {jest.fn()}>
             {mockChildren}
           </GameScreen>
         </Provider>
@@ -38,7 +39,8 @@ describe(`The component is rendered correctly.`, () => {
     .create(
         <Provider store = {store}>
           <GameScreen
-            type = {`artist`}>
+            type = {`artist`}
+            onBackButtonClick = {jest.fn()}>
             {mockChildren}
           </GameScreen>
         </Provider>

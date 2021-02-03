@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import WinScreen from './win-screen.jsx';
+import {WinScreen} from './win-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -15,7 +15,9 @@ beforeEach(() => {
   replayClickHandler = jest.fn();
   winScreen = shallow(
       <WinScreen
-        onReplayButtonClick = {replayClickHandler} />
+        gameTime = {3}
+        mistakes = {0}
+        onReset = {replayClickHandler} />
   );
   replayButton = winScreen.find(`.replay`);
 });

@@ -9,4 +9,14 @@ const FailMessage = {
   }
 };
 
-export {FailMessage};
+const Error = {
+  UNAUTHORIZED: 401
+};
+
+const UNIT = 1;
+
+export {
+  FailMessage,
+  Error,
+  UNIT
+};

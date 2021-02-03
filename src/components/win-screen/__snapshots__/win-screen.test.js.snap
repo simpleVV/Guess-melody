@@ -22,7 +22,9 @@ exports[`The component is rendered correctly. Win screen is renders correctly. 1
   <p
     className="result__total"
   >
-    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
+    За 0 минут(ы)
+        0 секунд
+         вы совершили 0 ошибки(ok)
   </p>
   <a
     className="replay"

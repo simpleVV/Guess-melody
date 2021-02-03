@@ -14,10 +14,15 @@ exports[`The component is rendered correctly. Sign in screen is renders correctl
       width="186"
     />
   </div>
+  <h2
+    className="login__title"
+  >
+    Вы настоящий меломан!
+  </h2>
   <p
     className="login__text"
   >
-    Представтесь!
+    Хотите узнать свой результат? Представтесь!
   </p>
   <form
     action=""
@@ -37,6 +42,7 @@ exports[`The component is rendered correctly. Sign in screen is renders correctl
         className="login__input"
         id="name"
         name="name"
+        onChange={[MockFunction]}
         required={true}
         type="email"
       />
@@ -54,6 +60,7 @@ exports[`The component is rendered correctly. Sign in screen is renders correctl
         className="login__input"
         id="password"
         name="password"
+        onChange={[MockFunction]}
         required={true}
         type="password"
       />

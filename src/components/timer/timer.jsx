@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {ActionCreator as GameActionCreator} from '../../reducer/game/game-action-creator.js';
 import {getGameTime} from '../../reducer/game/selectors.js';
+import {convertTime} from '../../utils/utils.js';
 
 class Timer extends PureComponent {
   constructor(props) {
@@ -22,7 +23,8 @@ class Timer extends PureComponent {
   }
 
   render() {
-    const [minutes, seconds] = this._convertTime();
+    const {gameTime} = this.props;
+    const [minutes, seconds] = convertTime(gameTime);
 
     return (
       <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
@@ -55,14 +57,6 @@ class Timer extends PureComponent {
     onTimeUpdate(gameTime);
   }
 
-  _convertTime() {
-    const {gameTime} = this.props;
-    const secInMin = 60;
-    const mins = Math.floor(gameTime / this.props.milSecInSec / secInMin);
-    const secRemainOfMin = Math.floor((gameTime / this.props.milSecInSec) % secInMin);
-
-    return [mins, secRemainOfMin];
-  }
 }
 
 Timer.defaultProps = {

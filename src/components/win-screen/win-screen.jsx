@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {ActionCreator as GameActionCreator} from '../../reducer/game/game-action-creator.js';
+import {
+  getGameTime,
+  getMistakes
+} from '../../reducer/game/selectors.js';
+import {convertTime} from '../../utils/utils.js';
+import {UNIT} from '../../utils/const.js';
 
 const WinScreen = (props) => {
-  const {onReplayButtonClick} = props;
+  const {
+    onReset,
+    gameTime,
+    mistakes
+  } = props;
+
+  const [minutes, seconds] = convertTime(gameTime);
 
   return (
     <section className="result">
@@ -12,13 +27,17 @@ const WinScreen = (props) => {
       </div>
       <h2 className="result__title">Вы настоящий меломан!</h2>
       <p className="result__total">
-        За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
+        {
+          `За ${minutes} минут(${minutes === UNIT ? `у` : `ы`})
+        ${seconds} секунд${seconds === UNIT ? `(у)` : ``}
+         вы совершили ${mistakes} ошибки(${mistakes === UNIT ? `у` : `ok`})`
+        }
       </p>
       <Link
         to="/"
         className="replay"
         type="button"
-        onClick = {onReplayButtonClick}>
+        onClick = {onReset}>
           Сыграть ещё раз
       </Link>
     </section>
@@ -26,7 +45,19 @@ const WinScreen = (props) => {
 };
 
 WinScreen.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired
+  onReset: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  gameTime: PropTypes.number.isRequired
 };
 
-export default WinScreen;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  mistakes: getMistakes(state),
+  gameTime: getGameTime(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onReset: () => dispatch(GameActionCreator.reset())
+});
+
+export {WinScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(WinScreen);

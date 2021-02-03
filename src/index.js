@@ -10,11 +10,15 @@ import {
 
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
+import {ActionCreator} from './reducer/user/user.js';
 import {Operation as DataOperation} from './reducer/data/data-action-creator.js';
 import createAPI from './api.js';
 
 const init = () => {
-  const api = createAPI(() => {});
+  const onLoginFail = () => {
+    store.dispatch(ActionCreator.requireAuthorization(true));
+  };
+  const api = createAPI(onLoginFail);
   const store = createStore(
       reducer,
       composeWithDevTools(

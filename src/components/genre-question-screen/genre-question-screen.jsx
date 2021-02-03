@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import GenreItem from '../genre-screen-item/genre-screen-item.jsx';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.js';
 
 const GenreQuestionScreen = (props) => {
   const {
@@ -64,4 +65,5 @@ GenreQuestionScreen.propTypes = {
   ).isRequired
 };
 
-export default GenreQuestionScreen;
+export {GenreQuestionScreen};
+export default withUserAnswer(GenreQuestionScreen);

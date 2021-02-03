@@ -4,15 +4,13 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import withFormData from '../../hocs/with-form-data/with-form-data.js';
 import {Operation} from '../../reducer/user/user-action-creator.js';
 import {getUser} from '../../reducer/user/selectors.js';
 
 class SignIn extends PureComponent {
   constructor(props) {
     super(props);
-
-    this._loginRef = React.createRef();
-    this._passwordRef = React.createRef();
 
     this._submitHandler = this._submitHandler.bind(this);
   }
@@ -25,10 +23,16 @@ class SignIn extends PureComponent {
   }
 
   render() {
+    const {
+      onLoginChange,
+      onPasswordChange
+    } = this.props;
+
     return (
       <section className="login">
         <div className="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
-        <p className="login__text">Представтесь!</p>
+        <h2 className="login__title">Вы настоящий меломан!</h2>
+        <p className="login__text">Хотите узнать свой результат? Представтесь!</p>
         <form
           className="login__form"
           action=""
@@ -41,9 +45,9 @@ class SignIn extends PureComponent {
             <input
               className="login__input"
               type="email"
+              onChange = {onLoginChange}
               name="name"
               id="name"
-              ref = {this._loginRef}
               required />
           </p>
           <p className="login__field">
@@ -51,9 +55,9 @@ class SignIn extends PureComponent {
             <input
               className="login__input"
               type="password"
+              onChange = {onPasswordChange}
               name="password"
               id="password"
-              ref = {this._passwordRef}
               required />
             <span className="login__error">Неверный пароль</span>
           </p>
@@ -68,10 +72,14 @@ class SignIn extends PureComponent {
   }
 
   _submitHandler() {
-    const {login} = this.props;
+    const {
+      login,
+      formData
+    } = this.props;
+    const {email = ``, password = ``} = formData;
     const userData = {
-      email: this._loginRef.current.value,
-      password: this._passwordRef.current.value
+      email,
+      password
     };
 
     login(userData);
@@ -81,6 +89,14 @@ class SignIn extends PureComponent {
 SignIn.propTypes = {
   login: PropTypes.func.isRequired,
   user: PropTypes.object,
+  onLoginChange: PropTypes.func.isRequired,
+  onPasswordChange: PropTypes.func.isRequired,
+  formData: PropTypes.shape(
+      {
+        email: PropTypes.string,
+        password: PropTypes.string
+      }
+  ),
   history: PropTypes.shape(
       {
         push: PropTypes.func
@@ -97,4 +113,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SignIn};
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));
+export default withFormData(connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn)));

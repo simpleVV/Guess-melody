@@ -28,18 +28,6 @@ const Operation = {
         dispatch(ActionCreator.authorizeUser(response.data));
       });
   },
-
-  checkAuth: () => (dispatch, getState, api) => {
-    return api.post(`/login`)
-    .then((response) => {
-      if (response.status === `200`) {
-        dispatch(ActionCreator.requireAuthorization(false));
-      }
-    })
-    .catch((err) => {
-      throw (err);
-    });
-  }
 };
 
 export {

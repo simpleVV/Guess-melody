@@ -8,12 +8,19 @@ const GameScreen = (props) => {
   const {
     children,
     type,
+    onBackButtonClick
   } = props;
 
   return (
     <section className={`game game--${type}`}>
       <header className="game__header">
-        <a className="game__back" href="#">
+        <a
+          className="game__back"
+          href="#"
+          onClick = {(evt) => {
+            evt.preventDefault();
+            onBackButtonClick();
+          }}>
           <span className="visually-hidden">Сыграть ещё раз</span>
           <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
         </a>
@@ -40,6 +47,7 @@ GameScreen.propTypes = {
     PropTypes.node
   ]).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
+  onBackButtonClick: PropTypes.func.isRequired
 };
 
 export default GameScreen;

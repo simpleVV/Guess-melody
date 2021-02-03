@@ -10,6 +10,7 @@ exports[`The component is rendered correctly. With type artist. 1`] = `
     <a
       className="game__back"
       href="#"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -91,6 +92,7 @@ exports[`The component is rendered correctly. With type genre. 1`] = `
     <a
       className="game__back"
       href="#"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"

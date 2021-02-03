@@ -1,6 +1,7 @@
+import MockAdapter from 'axios-mock-adapter';
+
 import {ActionType} from './user.js';
 import createAPI from '../../api.js';
-import MockAdapter from 'axios-mock-adapter';
 import {
   ActionCreator,
   Operation

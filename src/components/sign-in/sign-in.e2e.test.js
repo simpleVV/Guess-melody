@@ -10,12 +10,19 @@ Enzyme.configure({adapter: new Adapter()});
 let loginHandler;
 let signIn;
 let loginForm;
+const mockFormData = {
+  email: `mock@mail.ru`,
+  password: `mockpass`
+};
 
 beforeEach(() => {
   loginHandler = jest.fn();
   signIn = mount(
       <BrowserRouter>
         <SignIn
+          onLoginChange = {jest.fn()}
+          onPasswordChange = {jest.fn()}
+          formData = {mockFormData}
           login = {loginHandler} />
       </BrowserRouter>
   );
@@ -43,9 +50,6 @@ describe(`After submitting login form.`, () => {
       evt.preventDefault();
     });
 
-    expect(loginHandler.mock.calls[0][0]).toEqual({
-      email: ``,
-      password: ``
-    });
+    expect(loginHandler.mock.calls[0][0]).toEqual(mockFormData);
   });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import WinScreen from './win-screen.jsx';
+import {WinScreen} from './win-screen.jsx';
 
 describe(`The component is rendered correctly.`, () => {
   it(`Win screen is renders correctly.`, () => {
@@ -10,7 +10,9 @@ describe(`The component is rendered correctly.`, () => {
     .create(
         <BrowserRouter>
           <WinScreen
-            onReplayButtonClick = {jest.fn()}
+            mistakes = {0}
+            gameTime = {3}
+            onReset = {jest.fn()}
           />
         </BrowserRouter>
     )
